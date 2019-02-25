@@ -13,6 +13,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ShowRecipesActivity">
+        </activity>
         <activity android:name=".EducationalReferencesActivity">
         </activity>
         <activity android:name=".MealPlannerActivity">
@@ -20,10 +22,6 @@
         <activity android:name=".ShoppingListActivity">
         </activity>
         <activity android:name=".FindRecipesActivity">
-        </activity>
-        <activity
-                android:name=".LoginActivity"
-                android:label="@string/title_activity_login">
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
