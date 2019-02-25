@@ -11,4 +11,8 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="find_recipes">Find Recipes</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="meal_planner">Meal Planner</string>
+    <string name="educational_references">Educational References</string>
 </resources>
