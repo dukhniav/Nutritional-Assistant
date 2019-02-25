@@ -15,4 +15,11 @@
     <string name="shopping_list">Shopping List</string>
     <string name="meal_planner">Meal Planner</string>
     <string name="educational_references">Educational References</string>
+    <string name="please_choose_your_options">Please choose your options</string>
+    <string name="cook_time">Cook Time</string>
+    <string name="save_for_future_searches">Save for future searches</string>
+    <string name="show_recipes">Show Recipes</string>
+    <string name="number_of_servings">Number of Servings</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="budget">Budget</string>
 </resources>
