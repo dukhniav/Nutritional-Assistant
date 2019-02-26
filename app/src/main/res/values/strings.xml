@@ -22,4 +22,13 @@
     <string name="number_of_servings">Number of Servings</string>
     <string name="difficulty">Difficulty</string>
     <string name="budget">Budget</string>
+    <string name="utensils">Utensils</string>
+    <string name="reference_information">Reference Information</string>
+    <string name="food_prep">Food Prep</string>
+    <string name="food_storage">Food Storage</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="title_activity_nutritional_facts">NutritionalFactsActivity</string>
+    <string name="title_activity_utensils">Utensils</string>
+    <string name="title_activity_food_preparation">FoodPreparation</string>
+    <string name="title_activity_food_storage">FoodStorage</string>
 </resources>

@@ -7,4 +7,59 @@
         android:layout_height="match_parent"
         tools:context=".EducationalReferencesActivity">
 
+    <Button
+            android:text="@string/utensils"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:id="@+id/utensilBtn"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.625" style="@style/Widget.AppCompat.Button.Colored"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/white" android:background="@color/design_default_color_primary"/>
+    <Button
+            android:text="@string/nutrition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:id="@+id/nutritionBtn"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.935"
+            style="@style/Widget.AppCompat.Button.Colored" android:background="@color/design_default_color_primary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" android:textColor="@android:color/white"/>
+    <Button
+            android:text="@string/food_storage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:id="@+id/foodStorageBtn"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.829"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            style="@style/Widget.AppCompat.Button.Colored" android:textColor="@android:color/white"
+            android:background="@color/design_default_color_primary"/>
+    <Button
+            android:text="@string/food_prep"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:id="@+id/foodPrepBtn"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.722" style="@style/Widget.AppCompat.Button.Colored"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/white" android:background="@color/design_default_color_primary"/>
+    <TextView
+            android:text="@string/reference_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintHorizontal_bias="0.491" app:layout_constraintVertical_bias="0.499"/>
 </android.support.constraint.ConstraintLayout>
