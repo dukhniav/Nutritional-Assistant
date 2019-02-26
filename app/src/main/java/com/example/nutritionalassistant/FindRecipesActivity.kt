@@ -15,4 +15,7 @@ class FindRecipesActivity : AppCompatActivity() {
             val intent = Intent(this, ShowRecipesActivity::class.java)
             startActivity(intent) }
     }
+
+    //TODO: save values from sliders for future searches
+
 }
