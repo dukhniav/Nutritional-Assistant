@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
         shoppingListBtn.setOnClickListener {
             val intent = Intent(this, ShoppingListActivity::class.java)
             startActivity(intent) }
-        mealPlannerBtn.setOnClickListener {
-            val intent = Intent(this, MealPlannerActivity::class.java)
+        myRecipesBtn.setOnClickListener {
+            val intent = Intent(this, MyRecipesActivity::class.java)
             startActivity(intent) }
         educationalReferencesBtn.setOnClickListener {
             val intent = Intent(this, EducationalReferencesActivity::class.java)

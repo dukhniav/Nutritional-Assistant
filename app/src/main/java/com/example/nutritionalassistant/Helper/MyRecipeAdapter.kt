@@ -16,7 +16,6 @@ class MyRecipeAdapter(val recipeList: ArrayList<Recipe>): RecyclerView.Adapter<M
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.recipeName?.text = recipeList[position].name
-        holder?.recipeDuration?.text = recipeList[position].duration
     }
 
     override fun getItemCount(): Int {
@@ -25,7 +24,6 @@ class MyRecipeAdapter(val recipeList: ArrayList<Recipe>): RecyclerView.Adapter<M
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val recipeName = itemView.findViewById<TextView>(R.id.recipeName)!!
-        val recipeDuration = itemView.findViewById<TextView>(R.id.recipeDuration)!!
 
     }
 

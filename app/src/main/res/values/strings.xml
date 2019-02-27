@@ -31,4 +31,5 @@
     <string name="title_activity_utensils">Utensils</string>
     <string name="title_activity_food_preparation">FoodPreparation</string>
     <string name="title_activity_food_storage">FoodStorage</string>
+    <string name="my_recipes">My Recipes</string>
 </resources>
