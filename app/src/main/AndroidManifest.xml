@@ -15,8 +15,6 @@
             android:theme="@style/AppTheme">
         <activity android:name=".MyRecipesActivity">
         </activity>
-        <activity android:name=".MyRecipesActivities">
-        </activity>
         <activity
                 android:name=".references.FoodStorage"
                 android:label="@string/title_activity_food_storage"
@@ -37,20 +35,10 @@
                 android:label="@string/title_activity_nutritional_facts"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-                android:name=".NutritionalFactsActivity"
-                android:label="@string/title_activity_nutritional_facts"
-                android:parentActivityName=".EducationalReferencesActivity"
-                android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.example.nutritionalassistant.EducationalReferencesActivity"/>
-        </activity>
+
         <activity android:name=".ShowRecipesActivity">
         </activity>
         <activity android:name=".EducationalReferencesActivity">
-        </activity>
-        <activity android:name=".MealPlannerActivity">
         </activity>
         <activity android:name=".ShoppingListActivity">
         </activity>
