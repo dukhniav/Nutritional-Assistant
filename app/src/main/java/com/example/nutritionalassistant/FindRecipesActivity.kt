@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SeekBar
 import android.widget.TextView
+import com.example.nutritionalassistant.helper.Recipe
+import com.example.nutritionalassistant.helper.recipe_search
 import kotlinx.android.synthetic.main.activity_find_recipes.*
 
 class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener{
@@ -82,7 +84,13 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         servingsSeekbarView!!.setOnSeekBarChangeListener(this)
 
         showRecipesBtn.setOnClickListener {
+
+
+
             val intent = Intent(this, ShowRecipesActivity::class.java)
+            //val file = recipe_search.recipeSearch(buildQuery())
+
+            //intent.putParcelableArrayListExtra("recipes", file)
             startActivity(intent) }
     }
 

@@ -17,13 +17,14 @@ class ShowRecipesActivity : AppCompatActivity() {
         val rv = findViewById<RecyclerView>(R.id.recyclerViewRecipes)
         rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         val recipes = ArrayList<Recipe>()
-        recipes.add(Recipe("Stew", "5"))
-        recipes.add(Recipe("Potatos", "6"))
-        recipes.add(Recipe("Kale", "7"))
-        recipes.add(Recipe("Tomato", "8"))
-        recipes.add(Recipe("Tomato", "1"))
-        recipes.add(Recipe("Lettuce", "18"))
-        recipes.add(Recipe("Peanuts", "83"))
+        recipes.add(Recipe("My Stew","","","","", 0.0F,"",0.0F,0.0F))
+        recipes.add(Recipe("My Stew1","","","","", 0.0F,"",0.0F,0.0F))
+        recipes.add(Recipe("My Stew2","","","","", 0.0F,"",0.0F,0.0F))
+        recipes.add(Recipe("My Stew3","","","","", 0.0F,"",0.0F,0.0F))
+        recipes.add(Recipe("My Stew4","","","","", 0.0F,"",0.0F,0.0F))
+        recipes.add(Recipe("My Stew5","","","","", 0.0F,"",0.0F,0.0F))
+        recipes.add(Recipe("My Stew6","","","","", 0.0F,"",0.0F,0.0F))
+
 
         //TODO: save and retrieve recipes to/from DB
 
