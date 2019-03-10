@@ -15,7 +15,7 @@ class MyRecipeAdapter(val recipeList: ArrayList<Recipe>): RecyclerView.Adapter<M
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.recipeName?.text = recipeList[position].name
+        holder?.recipeName?.text = recipeList[position].label
     }
 
     override fun getItemCount(): Int {
