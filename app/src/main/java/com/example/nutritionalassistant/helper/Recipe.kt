@@ -6,45 +6,47 @@ import android.os.Parcelable
 // Object for recipes
 // Currently only has basic information, will have more later
 
-data class Recipe(val label: String, val image: String, val source: String,
-                  val url: String, val shareAs: String, val yeild: Float,
-                  val ingredientsLines: String, val calories: Float, val totalTime: Float) : Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readFloat(),
-            parcel.readString(),
-            parcel.readFloat(),
-            parcel.readFloat()) {
+class Recipe{
+
+    var id: Int? = 0
+    var label: String? = null
+    var image: String? = null
+    var source: String? = null
+    var url: String? = null
+    var shareAs: String? = null
+    var yieldServings: Float? = 0.0f
+    var ingredientsLines: String? = null
+    var calories: Float? = 0.0F
+    var totalTime: Float? = 0.0F
+
+    constructor(id: Int, label: String, image: String,
+                source: String, url: String, shareAs: String,
+                yieldServings: Float, ingredientsLines: String,
+                calories: Float, totalTime: Float) {
+        this.id = id
+        this.label = label
+        this.image = image
+        this.source = source
+        this.url = url
+        this.shareAs = shareAs
+        this.yieldServings = yieldServings
+        this.ingredientsLines = ingredientsLines
+        this.calories = calories
+        this.totalTime = totalTime
     }
 
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(label)
-        parcel.writeString(image)
-        parcel.writeString(source)
-        parcel.writeString(url)
-        parcel.writeString(shareAs)
-        parcel.writeFloat(yeild)
-        parcel.writeString(ingredientsLines)
-        parcel.writeFloat(calories)
-        parcel.writeFloat(totalTime)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Recipe> {
-        override fun createFromParcel(parcel: Parcel): Recipe {
-            return Recipe(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Recipe?> {
-            return arrayOfNulls(size)
-        }
+    constructor(label: String, image: String,
+                source: String, url: String, shareAs: String,
+                yieldServings: Float, ingredientsLines: String,
+                calories: Float, totalTime: Float) {
+        this.label = label
+        this.image = image
+        this.source = source
+        this.url = url
+        this.shareAs = shareAs
+        this.yieldServings = yieldServings
+        this.ingredientsLines = ingredientsLines
+        this.calories = calories
+        this.totalTime = totalTime
     }
 }

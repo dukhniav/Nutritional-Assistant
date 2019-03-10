@@ -176,40 +176,39 @@
         app:layout_constraintVertical_bias="0.914" />
 
     <TextView
-        android:id="@+id/seekCookText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/seekCook"
-        app:layout_constraintEnd_toEndOf="@+id/seekCook" />
+            android:id="@+id/seekCookText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@+id/seekCook"
+            app:layout_constraintEnd_toEndOf="@+id/seekCook"/>
 
     <TextView
-        android:id="@+id/seekBudgetText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/seekBudget"
-        app:layout_constraintEnd_toEndOf="@+id/seekCook" />
+            android:id="@+id/seekBudgetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/seekBudget"
+            app:layout_constraintEnd_toEndOf="@+id/seekCook" android:text="0"/>
 
     <TextView
-        android:id="@+id/seekDifficultyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/seekDifficulty"
-        app:layout_constraintEnd_toEndOf="@+id/seekDifficulty" />
+            android:id="@+id/seekDifficultyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@+id/seekDifficulty"
+            app:layout_constraintEnd_toEndOf="@+id/seekDifficulty"/>
 
     <TextView
-        android:id="@+id/seekServingsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/seekServings"
-        app:layout_constraintEnd_toEndOf="@+id/seekServings" />
+            android:id="@+id/seekServingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="24dp"
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@+id/seekServings"
+            app:layout_constraintEnd_toEndOf="@+id/seekServings"/>
 </android.support.constraint.ConstraintLayout>
