@@ -32,4 +32,6 @@
     <string name="title_activity_food_preparation">FoodPreparation</string>
     <string name="title_activity_food_storage">FoodStorage</string>
     <string name="my_recipes">My Recipes</string>
+    <string name="zero">0</string>
+    <string name="signin">Sign In</string>
 </resources>
