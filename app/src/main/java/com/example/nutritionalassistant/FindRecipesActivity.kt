@@ -18,15 +18,22 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
     private var servingsText: TextView? = null
     private var servingsSeekbarView: SeekBar? = null
 
+    private var minCook = 1
+    private var maxCook = 720
+    private var minCost = 0
+    private var maxCost = 1000
+    private var minIngredients = 1
+    private var maxIngredients = 100
+    private var minServings = 1
+    private var maxServings = 50
 
     override fun onProgressChanged(p0: SeekBar?, progress: Int, p2: Boolean) {
         when(p0!!.id) {
-            cookSeekbarView!!.id -> cookText!!.text = progress.toString()
-            budgetSeekbarView!!.id -> budgetText!!.text = progress.toString()
-            difficultySeekbarView!!.id -> difficultyText!!.text = progress.toString()
-            servingsSeekbarView!!.id -> servingsText!!.text = progress.toString()
+            cookSeekbarView!!.id -> cookText!!.text = scale(progress,minCook,maxCook).toString()
+            budgetSeekbarView!!.id -> budgetText!!.text = scale(progress,minCost,maxCost).toString()
+            difficultySeekbarView!!.id -> difficultyText!!.text = scale(progress,minIngredients,maxIngredients).toString()
+            servingsSeekbarView!!.id -> servingsText!!.text = scale(progress,minServings,maxServings).toString()
         }
-
         buildQuery(q = "chicken", to = 100)
     }
     /* -----------
@@ -55,8 +62,10 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         val rCalories = "calories:$maxCalories"
         val rTime = "time:$time"
         val rExcluded = "excluded:$excluded"
-
         return arrayOf(rQ, rFrom, rTo, rIngr, rDiet, rCalories, rTime, rExcluded)
+    }
+    private fun scale(i: Int, min: Int, max: Int): Int{
+        return ((i.toDouble() / 100) * (max.toDouble() - min.toDouble())).toInt() + min
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {}
