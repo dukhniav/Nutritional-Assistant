@@ -2,11 +2,20 @@ package com.example.nutritionalassistant
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.RequiresApi
+import android.util.Log
 import android.widget.SeekBar
 import android.widget.TextView
+import com.example.nutritionalassistant.helper.ConvertToRecipes
+import com.example.nutritionalassistant.helper.MyDBHandler
+import com.example.nutritionalassistant.helper.recipe_search
 import kotlinx.android.synthetic.main.activity_find_recipes.*
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.StandardOpenOption
 
 class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener{
     private var cookText: TextView? = null
@@ -27,7 +36,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
             servingsSeekbarView!!.id -> servingsText!!.text = progress.toString()
         }
 
-        buildQuery(q = "chicken", to = 100)
+
     }
     /* -----------
      * Build Query
@@ -44,7 +53,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
      *
      * https://developer.edamam.com/edamam-docs-recipe-api
     */
-    fun buildQuery(q: String = "", from: Int = 0, to: Int = 10, ingr: Int = 99,
+    fun buildQuery(q: String = "", from: Int = 0, to: Int = 100, ingr: Int = 99,
                    diet: String = "balanced", maxCalories: Int = 9999,
                    time: Int = 999, excluded: String = ""): Array<String> {
         val rQ = "q:$q"
@@ -56,12 +65,13 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         val rTime = "time:$time"
         val rExcluded = "excluded:$excluded"
 
-        return arrayOf(rQ, rFrom, rTo, rIngr, rDiet, rCalories, rTime, rExcluded)
+        return arrayOf<String>(rQ, rFrom, rTo, rIngr, rDiet, rCalories, rTime, rExcluded)
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {}
     override fun onStopTrackingTouch(p0: SeekBar?) {}
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_recipes)
@@ -95,7 +105,20 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
 
         showRecipesBtn.setOnClickListener {
             val intent = Intent(this, ShowRecipesActivity::class.java)
-            //val file = recipe_search.recipeSearch(buildQuery())
+            print(buildQuery())
+            Log.e("TAG", "d0")
+            val file = recipe_search.recipeSearch(buildQuery(q="chicken", to=100))
+
+            Log.d("TAG", file)
+            print(file)
+            Log.d("TAG", "d1")
+
+            
+            val convert = ConvertToRecipes()
+            Log.d("TAG", "d2")
+
+            convert.convert(file)
+            Log.d("TAG", "d3")
 
             // Shared Preferences
             if (switchFuture.isChecked) {
@@ -115,6 +138,9 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
                 editor.apply()
             }
             //intent.putParcelableArrayListExtra("recipes", file)
+
+            //buildQuery(q = "chicken", to = 100)
+
             startActivity(intent)
         }
     }

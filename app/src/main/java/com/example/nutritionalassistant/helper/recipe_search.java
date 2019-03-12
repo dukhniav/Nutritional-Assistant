@@ -9,6 +9,8 @@ package com.example.nutritionalassistant.helper;
  * recipe_search.java
  */
 
+import android.util.Log;
+
 import java.io.BufferedReader;
         import java.io.InputStreamReader;
         import java.net.URL;
@@ -79,7 +81,6 @@ public class recipe_search {
             } else {
                 opts.put(pair[0], "");
             }
-
         }
         return opts;
     }
@@ -95,6 +96,7 @@ public class recipe_search {
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             while ((line = rd.readLine()) != null) {
                 response.append(line);
+                Log.d("TAG", line);
             }
             rd.close();
         } catch (Exception e) {
