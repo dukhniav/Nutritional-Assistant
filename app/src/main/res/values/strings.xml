@@ -14,7 +14,7 @@
     <string name="find_recipes">Find Recipes</string>
     <string name="shopping_list">Shopping List</string>
     <string name="meal_planner">Meal Planner</string>
-    <string name="educational_references">Educational References</string>
+    <string name="educational_references">Education</string>
     <string name="please_choose_your_options">Please choose your options</string>
     <string name="cook_time">Cook Time</string>
     <string name="save_for_future_searches">Save for future searches</string>
@@ -33,5 +33,9 @@
     <string name="title_activity_food_storage">FoodStorage</string>
     <string name="my_recipes">My Recipes</string>
     <string name="zero">0</string>
+    <string name="min_cook">1</string>
+    <string name="min_ingredients">1</string>
+    <string name="min_budget">0</string>
+    <string name="min_servings">1</string>
     <string name="signin">Sign In</string>
 </resources>
