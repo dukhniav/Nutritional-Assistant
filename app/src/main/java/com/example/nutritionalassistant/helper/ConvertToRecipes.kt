@@ -1,16 +1,22 @@
 package com.example.nutritionalassistant.helper
 
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.nutritionalassistant.FindRecipesActivity
 import org.json.JSONObject
 import kotlin.collections.ArrayList
 
-class ConvertToRecipes {
+
+class ConvertToRecipes : AppCompatActivity() {
 
 
-    fun convert(fileContents:String) {
+    fun convert(fileContents:String) : ArrayList<Recipe>{
+        var recipeAr: ArrayList<Recipe> = ArrayList()
 
         val dbHandler = MyDBHandler(this, null, null, 1)
+        Log.d("TAG", "THIS: " + this.toString())
 
         //Make sure content is similar to a JSON content
         if (!fileContents.matches(("/.*\\S.*/").toRegex()))
@@ -43,11 +49,11 @@ class ConvertToRecipes {
 
                 val dietArr = JSONRecipe.getJSONArray("dietLabels")
                 val diet: ArrayList<String> = ArrayList()
-                if (dietArr.length() == 0){
-                    for (i in 0..(dietArr.length() - 1)) {
-                        diet.add(dietArr.getJSONObject(i).toString())
+                if (dietArr.length() != 0){
+                    for (i in 0..(dietArr.length() -1 ) ) {
                         Log.d("TAG", "d5")
-
+                        Log.d("TAG", "OBJECT: " + dietArr.getString(i))
+                        diet.add(dietArr.toString(i))
                     }
                 }
 
@@ -80,10 +86,12 @@ class ConvertToRecipes {
                 recipe = Recipe(label, image, url, share, yieldServ, ingredients, calories, time)
 
                 Log.d("TAG", "d8")
-                dbHandler.addRecipe(recipe)
+                recipeAr.add(recipe)
+                //dbHandler.addRecipe(recipe)
                 Log.d("TAG", "d9")
             }
 
         }
+        return recipeAr
     }
 }

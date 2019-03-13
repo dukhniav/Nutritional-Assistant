@@ -1,33 +1,36 @@
 package com.example.nutritionalassistant.helper
 
 import android.content.ContentValues
+import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.Parcel
+import android.os.Parcelable
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
 
-class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) :
+class MyDBHandler(
+        context: Context,
+        name: String?,
+        factory: SQLiteDatabase.CursorFactory?,
+        version: Int
+) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_RECIPE_TABLE)
-        db?.execSQL(CREATE_MY_RECIPE_TABLE)
-        db?.execSQL(CREATE_INGREDIENTS_TABLE)
-//        db?.execSQL(CREATE_SAVE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         // on upgrade, drop old tables
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_RECIPE")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_MY_RECIPE")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_SAVE")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_INGREDIENTS")
-
-        // create new tables
         onCreate(db)
     }
 
     // ----------------------------- RECIPE --------------------------------------
     fun addRecipe(recipe: Recipe) {
+        Log.d("TAG", "AddRecipe")
         val values = ContentValues()
         values.put(KEY_ID, recipe.id)
         values.put(COLUMN_RECIPE_LABEL, recipe.label)
@@ -39,10 +42,13 @@ class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatab
         values.put(COLUMN_RECIPE_CALORIES, recipe.calories)
         values.put(COLUMN_RECIPE_TOTALTIME, recipe.totalTime)
 
+        Log.d("TAG", "Before WritableDatabase")
         val db = this.writableDatabase
+        Log.d("TAG", "WritableDatabase")
 
         db.insert(TABLE_RECIPE, null, values)
         db.close()
+        Log.d("TAG", "works")
     }
 
     fun findRecipe(recipeLabel: String): Recipe? {
@@ -71,6 +77,7 @@ class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatab
                         url, shareAs, yieldServings, ingredients,
                         calories, totalTime)
 
+
             cursor.close()
         }
         db.close()
@@ -78,6 +85,7 @@ class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatab
     }
 
     fun getAllRecipes() : ArrayList<Recipe> {
+        Log.d("TAG", "getAllRecipes")
         val db = this.writableDatabase
         val recArray = ArrayList<Recipe>()
 
@@ -222,7 +230,6 @@ class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatab
         // recipe table - column names
         private const val COLUMN_RECIPE_LABEL = "recipe_label"
         private const val COLUMN_RECIPE_IMAGE = "recipe_image"
-        private const val COLUMN_RECIPE_SOURCE = "recipe_source"
         private const val COLUMN_RECIPE_URL = "recipe_url"
         private const val COLUMN_RECIPE_SHARE = "recipe_share"
         private const val COLUMN_RECIPE_YIELDSERVINGS = "recipe_yield_servings"
@@ -255,14 +262,12 @@ class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatab
                 + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_RECIPE_LABEL + " TEXT, "
                 + COLUMN_RECIPE_IMAGE + " TEXT, "
-                + COLUMN_RECIPE_SOURCE + " TEXT, "
                 + COLUMN_RECIPE_URL + " TEXT, "
                 + COLUMN_RECIPE_SHARE + " TEXT, "
                 + COLUMN_RECIPE_YIELDSERVINGS + " FLOAT, "
                 + COLUMN_RECIPE_INGREDIENTLINES + " TEXT, "
                 + COLUMN_RECIPE_CALORIES + " FLOAT, "
-                + COLUMN_RECIPE_TOTALTIME + " FLOAT, "
-                + COLUMN_CREATED_AT + " DATETIME" + ")")
+                + COLUMN_RECIPE_TOTALTIME + " FLOAT" + ");")
 
         //  recipe
         private const val CREATE_MY_RECIPE_TABLE = ("CREATE TABLE " + TABLE_MY_RECIPE
@@ -277,4 +282,5 @@ class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatab
                 + COLUMN_ING_SOURCE + " TEXT, "
                 + COLUMN_INGREDIENT + " TEXT" + ")")
     }
+
 }
