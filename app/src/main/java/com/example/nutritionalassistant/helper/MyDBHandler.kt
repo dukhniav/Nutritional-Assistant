@@ -2,34 +2,39 @@ package com.example.nutritionalassistant.helper
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.Parcel
+import android.os.Parcelable
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
 
-class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) :
+class MyDBHandler(
+        context: Context,
+        name: String?,
+        factory: SQLiteDatabase.CursorFactory?,
+        version: Int
+) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_RECIPE_TABLE)
-        db?.execSQL(CREATE_MY_RECIPE_TABLE)
-//        db?.execSQL(CREATE_SAVE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         // on upgrade, drop old tables
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_RECIPE")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_MY_RECIPE")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_SAVE")
-
-        // create new tables
         onCreate(db)
     }
 
     // ----------------------------- RECIPE --------------------------------------
     fun addRecipe(recipe: Recipe) {
+        Log.d("TAG", "AddRecipe")
         val values = ContentValues()
+        values.put(KEY_ID, recipe.id)
         values.put(COLUMN_RECIPE_LABEL, recipe.label)
         values.put(COLUMN_RECIPE_IMAGE, recipe.image)
-        values.put(COLUMN_RECIPE_SOURCE, recipe.source)
         values.put(COLUMN_RECIPE_URL, recipe.url)
         values.put(COLUMN_RECIPE_SHARE, recipe.shareAs)
         values.put(COLUMN_RECIPE_YIELDSERVINGS, recipe.yieldServings)
@@ -37,10 +42,13 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
         values.put(COLUMN_RECIPE_CALORIES, recipe.calories)
         values.put(COLUMN_RECIPE_TOTALTIME, recipe.totalTime)
 
+        Log.d("TAG", "Before WritableDatabase")
         val db = this.writableDatabase
+        Log.d("TAG", "WritableDatabase")
 
         db.insert(TABLE_RECIPE, null, values)
         db.close()
+        Log.d("TAG", "works")
     }
 
     fun findRecipe(recipeLabel: String): Recipe? {
@@ -58,17 +66,17 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
             val id = Integer.parseInt(cursor.getString(0))
             val label = cursor.getString(1)
             val image = cursor.getString(2)
-            val source = cursor.getString(3)
-            val url = cursor.getString(4)
-            val shareAs = cursor.getString(5)
-            val yieldServings = cursor.getString(6).toFloat()
-            val ingredientsLines = cursor.getString(7)
-            val calories = cursor.getString(8).toFloat()
-            val totalTime = cursor.getString(9).toFloat()
+            val url = cursor.getString(3)
+            val shareAs = cursor.getString(4)
+            val yieldServings = cursor.getString(5).toFloat()
+            val ingredients = cursor.getString(6)
+            val calories = cursor.getString(7).toFloat()
+            val totalTime = cursor.getString(8).toFloat()
 
-            recipe = Recipe(id, label, image, source,
-                        url, shareAs, yieldServings, ingredientsLines,
+            recipe = Recipe(id, label, image,
+                        url, shareAs, yieldServings, ingredients,
                         calories, totalTime)
+
 
             cursor.close()
         }
@@ -76,6 +84,32 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
         return recipe
     }
 
+    fun getAllRecipes() : ArrayList<Recipe> {
+        Log.d("TAG", "getAllRecipes")
+        val db = this.writableDatabase
+        val recArray = ArrayList<Recipe>()
+
+        val cursor: Cursor = db.rawQuery("SELECT * FROM $TABLE_RECIPE", null)
+
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            do {
+                val recID = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                val recLabel = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_LABEL))
+                val recImage = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_IMAGE))
+                val recUrl = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_URL))
+                val recShare = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SHARE))
+                val recYield = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_YIELDSERVINGS))
+                val recIngredient = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_INGREDIENTLINES))
+                val recCalories = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_CALORIES))
+                val recTime = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_TOTALTIME))
+                val recipe = Recipe(recID, recLabel, recImage, recUrl, recShare, recYield, recIngredient, recCalories, recTime)
+                recArray.add(recipe)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return recArray
+    }
     fun deleteRecipe(recipeLabel: String): Boolean {
         var result = false
         val query = "SELECT * FROM $TABLE_RECIPE WHERE $COLUMN_RECIPE_LABEL = \"$recipeLabel\""
@@ -94,6 +128,42 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
         db.close()
         return result
     }
+//
+//    fun addIngredients(url: String, ingredients: ArrayList<String>) {
+//        val values = ContentValues()
+//        for (i in 0 until ingredients.size) {
+//            values.put(COLUMN_ING_SOURCE, url)
+//            values.put(COLUMN_INGREDIENT, ingredients[i])
+//        }
+//
+//        val db = this.writableDatabase
+//
+//        db.insert(TABLE_INGREDIENTS, null, values)
+//        db.close()
+//    }
+//
+//    fun findIngredient(url: String): ArrayList<String> {
+//
+//        val query = "SELECT *TABLE_$TABLE_INGREDIENTS WHERE $COLUMN_ING_SOURCE = \"$url\""
+//
+//        val db = this.writableDatabase
+//
+//        val cursor = db.rawQuery(query, null)
+//
+//        if (cursor.moveToFirst()) {
+//            cursor.moveToFirst()
+//
+//            val id = Integer.parseInt(cursor.getString(0))
+//            val url = cursor.getString(1)
+//            val ingredient = cursor.getString(2)
+//
+//            cursor.close()
+//        }
+//        db.close()
+//        return recipe
+//
+//
+//    }
     // ----------------------------- SAVE --------------------------------------
 //    fun savePref(cook: Int, budget: Int, dif: Int, serv: Int) {
 //        val values = ContentValues()
@@ -151,6 +221,7 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
         private const val TABLE_RECIPE = "recipe"
         private const val TABLE_MY_RECIPE = "my_recipe"
         private const val TABLE_SAVE = "save"
+        private const val TABLE_INGREDIENTS = "ingredients"
 
         // common column names
         private const val KEY_ID = "_id"
@@ -159,13 +230,16 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
         // recipe table - column names
         private const val COLUMN_RECIPE_LABEL = "recipe_label"
         private const val COLUMN_RECIPE_IMAGE = "recipe_image"
-        private const val COLUMN_RECIPE_SOURCE = "recipe_source"
         private const val COLUMN_RECIPE_URL = "recipe_url"
         private const val COLUMN_RECIPE_SHARE = "recipe_share"
         private const val COLUMN_RECIPE_YIELDSERVINGS = "recipe_yield_servings"
         private const val COLUMN_RECIPE_INGREDIENTLINES = "recipe_ingredient_lines"
         private const val COLUMN_RECIPE_CALORIES = "recipe_calories"
         private const val COLUMN_RECIPE_TOTALTIME = "recipe_total_time"
+
+        // ingredients table - column names
+        private const val COLUMN_ING_SOURCE = "ingredient_source"
+        private const val COLUMN_INGREDIENT = "ingredient"
 
 //        // SAVE VALS - COL NAMES
 //        private const val COLUMN_SAVE_BOOL = "save_bool"
@@ -188,19 +262,25 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
                 + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_RECIPE_LABEL + " TEXT, "
                 + COLUMN_RECIPE_IMAGE + " TEXT, "
-                + COLUMN_RECIPE_SOURCE + " TEXT, "
                 + COLUMN_RECIPE_URL + " TEXT, "
                 + COLUMN_RECIPE_SHARE + " TEXT, "
                 + COLUMN_RECIPE_YIELDSERVINGS + " FLOAT, "
                 + COLUMN_RECIPE_INGREDIENTLINES + " TEXT, "
                 + COLUMN_RECIPE_CALORIES + " FLOAT, "
-                + COLUMN_RECIPE_TOTALTIME + " FLOAT, "
-                + COLUMN_CREATED_AT + " DATETIME" + ")")
+                + COLUMN_RECIPE_TOTALTIME + " FLOAT" + ");")
 
         //  recipe
         private const val CREATE_MY_RECIPE_TABLE = ("CREATE TABLE " + TABLE_MY_RECIPE
                 + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_RECIPE_LABEL + " TEXT, "
                 + COLUMN_CREATED_AT + " DATETIME" + ")")
+
+
+        // INGREDIENTS
+        private const val CREATE_INGREDIENTS_TABLE = ("CREATE TABLE " + TABLE_INGREDIENTS
+                + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
+                + COLUMN_ING_SOURCE + " TEXT, "
+                + COLUMN_INGREDIENT + " TEXT" + ")")
     }
+
 }

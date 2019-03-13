@@ -2,11 +2,23 @@ package com.example.nutritionalassistant
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.RequiresApi
+import android.util.Log
 import android.widget.SeekBar
 import android.widget.TextView
+import com.example.nutritionalassistant.helper.ConvertToRecipes
+import com.example.nutritionalassistant.helper.MyDBHandler
+import com.example.nutritionalassistant.helper.recipe_search
 import kotlinx.android.synthetic.main.activity_find_recipes.*
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.StandardOpenOption
+import android.os.StrictMode
+
+
 
 class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener{
     private var cookText: TextView? = null
@@ -34,6 +46,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
             difficultySeekbarView!!.id -> difficultyText!!.text = scale(progress,minIngredients,maxIngredients).toString()
             servingsSeekbarView!!.id -> servingsText!!.text = scale(progress,minServings,maxServings).toString()
         }
+
         buildQuery(q = "chicken", to = 100)
     }
     /* -----------
@@ -51,7 +64,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
      *
      * https://developer.edamam.com/edamam-docs-recipe-api
     */
-    fun buildQuery(q: String = "", from: Int = 0, to: Int = 10, ingr: Int = 99,
+    fun buildQuery(q: String = "", from: Int = 0, to: Int = 100, ingr: Int = 99,
                    diet: String = "balanced", maxCalories: Int = 9999,
                    time: Int = 999, excluded: String = ""): Array<String> {
         val rQ = "q:$q"
@@ -62,7 +75,9 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         val rCalories = "calories:$maxCalories"
         val rTime = "time:$time"
         val rExcluded = "excluded:$excluded"
+      
         return arrayOf(rQ, rFrom, rTo, rIngr, rDiet, rCalories, rTime, rExcluded)
+
     }
     private fun scale(i: Int, min: Int, max: Int): Int{
         return ((i.toDouble() / 100) * (max.toDouble() - min.toDouble())).toInt() + min
@@ -71,9 +86,13 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
     override fun onStartTrackingTouch(p0: SeekBar?) {}
     override fun onStopTrackingTouch(p0: SeekBar?) {}
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_recipes)
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
 
         // shared pref
         val pref = getSharedPreferences("save", Context.MODE_PRIVATE)
@@ -104,7 +123,20 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
 
         showRecipesBtn.setOnClickListener {
             val intent = Intent(this, ShowRecipesActivity::class.java)
-            //val file = recipe_search.recipeSearch(buildQuery())
+            print(buildQuery())
+            Log.e("TAG", "d0")
+            val file = recipe_search.recipeSearch(buildQuery(q="chicken", to=100))
+
+            Log.e("TAG", "d1a")
+            val converter = ConvertToRecipes()
+            val recipeAr = converter.convert(file)
+
+            val dbHandler = MyDBHandler(this, null, null, 1)
+
+            for(i in recipeAr){
+                dbHandler.addRecipe(i)
+            }
+
 
             // Shared Preferences
             if (switchFuture.isChecked) {
@@ -124,6 +156,9 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
                 editor.apply()
             }
             //intent.putParcelableArrayListExtra("recipes", file)
+
+            //buildQuery(q = "chicken", to = 100)
+
             startActivity(intent)
         }
     }

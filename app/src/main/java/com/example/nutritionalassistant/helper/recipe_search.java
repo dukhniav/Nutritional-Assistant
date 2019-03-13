@@ -9,22 +9,31 @@ package com.example.nutritionalassistant.helper;
  * recipe_search.java
  */
 
-import java.io.BufferedReader;
-        import java.io.InputStreamReader;
-        import java.net.URL;
+import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.*;
+import java.net.URL;
         import java.net.HttpURLConnection;
-        import java.util.HashMap;
+import java.nio.charset.Charset;
+import java.util.HashMap;
         import java.util.Map;
 
 public class recipe_search {
 
+
+
     //Recipe Search (Used by app)
-    public static String recipeSearch(String[] options) {
+    public static String recipeSearch(String[] options) throws IOException, JSONException{
         String app_id = "6e9971e2";
         String app_key = "e6245a4398d314405ebb6c0e9264d6df";
 
         String url_path = getURL(options, app_id, app_key);
-        return queryRecipes(url_path);
+        //return queryRecipes(url_path);
+
+        JSONObject json = readJsonFromUrl(url_path);
+        return json.toString();
     }
 
     //Get Search URL
@@ -66,6 +75,7 @@ public class recipe_search {
             }
         }
 
+        Log.d("TAG", "Recipe: " + path.toString());
         return path.toString();
     }
 
@@ -79,7 +89,6 @@ public class recipe_search {
             } else {
                 opts.put(pair[0], "");
             }
-
         }
         return opts;
     }
@@ -95,12 +104,36 @@ public class recipe_search {
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             while ((line = rd.readLine()) != null) {
                 response.append(line);
+                Log.d("TAG", line);
             }
             rd.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.d("TAG", "response: " + response.toString());
+        Log.d("TAG", "response length: " + response.toString().length());
         return response.toString();
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            JSONObject json = new JSONObject(jsonText);
+            return json;
+        } finally {
+            is.close();
+        }
     }
 }
 
