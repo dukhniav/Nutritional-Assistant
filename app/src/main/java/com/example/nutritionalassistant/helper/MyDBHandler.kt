@@ -32,7 +32,6 @@ class MyDBHandler(
     fun addRecipe(recipe: Recipe) {
         Log.d("TAG", "AddRecipe")
         val values = ContentValues()
-        values.put(KEY_ID, recipe.id)
         values.put(COLUMN_RECIPE_LABEL, recipe.label)
         values.put(COLUMN_RECIPE_IMAGE, recipe.image)
         values.put(COLUMN_RECIPE_URL, recipe.url)
@@ -94,7 +93,6 @@ class MyDBHandler(
         if (cursor.count > 0) {
             cursor.moveToFirst()
             do {
-                val recID = cursor.getInt(cursor.getColumnIndex(KEY_ID))
                 val recLabel = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_LABEL))
                 val recImage = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_IMAGE))
                 val recUrl = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_URL))
@@ -103,7 +101,7 @@ class MyDBHandler(
                 val recIngredient = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_INGREDIENTLINES))
                 val recCalories = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_CALORIES))
                 val recTime = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_TOTALTIME))
-                val recipe = Recipe(recID, recLabel, recImage, recUrl, recShare, recYield, recIngredient, recCalories, recTime)
+                val recipe = Recipe(recLabel, recImage, recUrl, recShare, recYield, recIngredient, recCalories, recTime)
                 recArray.add(recipe)
             } while (cursor.moveToNext())
         }

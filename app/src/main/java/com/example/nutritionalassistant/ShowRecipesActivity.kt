@@ -25,13 +25,7 @@ class ShowRecipesActivity : AppCompatActivity() {
 
         val recipes = dbHandler.getAllRecipes()
 
-//        recipes.add(Recipe("My Stew","","","","", 0.0F,"",0.0F,0.0F))
-//        recipes.add(Recipe("My Stew1","","","","", 0.0F,"",0.0F,0.0F))
-//        recipes.add(Recipe("My Stew2","","","","", 0.0F,"",0.0F,0.0F))
-//        recipes.add(Recipe("My Stew3","","","","", 0.0F,"",0.0F,0.0F))
-//        recipes.add(Recipe("My Stew4","","","","", 0.0F,"",0.0F,0.0F))
-//        recipes.add(Recipe("My Stew5","","","","", 0.0F,"",0.0F,0.0F))
-//        recipes.add(Recipe("My Stew6","","","","", 0.0F,"",0.0F,0.0F))
+
 
         //TODO: save and retrieve recipes to/from DB
 
