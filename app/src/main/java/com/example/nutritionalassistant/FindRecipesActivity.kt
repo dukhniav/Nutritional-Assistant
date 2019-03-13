@@ -115,8 +115,16 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
             Log.e("TAG", "d0")
             val file = recipe_search.recipeSearch(buildQuery(q="chicken", to=100))
 
-            val convert = ConvertToRecipes()
-            convert.convert(file)
+            Log.e("TAG", "d1a")
+            val converter = ConvertToRecipes()
+            val recipeAr = converter.convert(file)
+
+            val dbHandler = MyDBHandler(this, null, null, 1)
+
+            for(i in recipeAr){
+                dbHandler.addRecipe(i)
+            }
+
 
             // Shared Preferences
             if (switchFuture.isChecked) {
