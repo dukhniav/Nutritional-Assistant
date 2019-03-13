@@ -14,7 +14,7 @@
     <string name="find_recipes">Find Recipes</string>
     <string name="shopping_list">Shopping List</string>
     <string name="meal_planner">Meal Planner</string>
-    <string name="educational_references">Educational References</string>
+    <string name="educational_references">Education</string>
     <string name="please_choose_your_options">Please choose your options</string>
     <string name="cook_time">Cook Time</string>
     <string name="save_for_future_searches">Save for future searches</string>
@@ -33,5 +33,145 @@
     <string name="title_activity_food_storage">FoodStorage</string>
     <string name="my_recipes">My Recipes</string>
     <string name="zero">0</string>
+    <string name="min_cook">1</string>
+    <string name="min_ingredients">1</string>
+    <string name="min_budget">0</string>
+    <string name="min_servings">1</string>
     <string name="signin">Sign In</string>
+    <string name="settings">More Settings...</string>
+    <string name="signout">Sign Out</string>
+    <string name="blank">\n</string>
+    <string name="education_content_utensils">
+          \n<b>Apple Corer</b> — This tool has a circular cutting edge that is forced down into the apple, allowing the apple to remain whole so it can then be easily sliced into sections for eating it out of hand or baking it whole with the outer skin. A tool used to extract the core from the apple without cutting the apple into sections and then individually cutting
+        \n\n<b>Apple Slicer</b> — This tool is pressed down over the apple to make eight uniform slices and remove the core.
+        \n\n<b>Can Opener</b> — A hand held device used for cutting cans open.
+        \n\n<b>Butter Knife</b> — A blunt knife used for cutting or spreading butter or other similar spreads.
+        \n\n<b>Chef’s Knife</b> — A large knife with a wide blade, generally considered all-purpose knives that are used for cutting and dicing.
+        \n\n<b>Flour Sifter</b> — A utensil used to incorporate air into flour and other dry ingredients.
+        \n\n<b>Garlic Press</b> — A press used for extracting juice from garlic
+        \n\n<b>Grater</b> — A device with sharp edged holes against which something is rubbed to reduce it to shreds. Used to grate such things as cheese.
+        \n\n<b>Kitchen Fork</b> — A utensil used to lift or turn small food.
+        \n\n<b>Knife</b> - Used for cutting and chopping. For specific types of knife see Butter Knife, Chef’s Knife, Paring knife, and Utility Knife
+        \n\n<b>Measuring Cups</b> — Cups that are used to measure dry and solid ingredients. They usually come in a set of four nesting cups: 1/4 cup, 1/3 cup, 1/2 cup, and 1 cup
+        \n\n<b>Measuring Spoons</b> — Spoons that are used to measure small amounts of dry or liquid ingredients
+        \n\n<b>Meat Tenderizer</b> — Hammer or paddle type utensil that comes in metal or wood and in a plethora of sizes and shapes. They can be large or small, have horizontal or vertical handles and be round-, square-, or mallet-shaped. Some have smooth surfaces while others are ridged.
+        \n\n<b>Melon Baller</b> — A small bowl-shaped tool used to cut round–or oval-shaped pieces of melon. The best melon ballers are rigidly constructed with wood or metal handles and sharp-edged, stainless steel bowls, which come in several sizes, from about 1/4” to 1”
+        \n\n<b>Mixing Bowl</b> — A large bowl made of pottery, glass, metal, or plastic and are used to mix ingredients and come in a variety of sizes.
+        \n\n<b>Paring Knife</b> — A knife that is smaller and shorter with fairly narrow blades, generally used for delicate jobs.
+        \n\n<b>Potato Masher</b> — A tool used to crush food, usually after cooking it, so that it forms a soft mass
+        \n\n<b>Rolling Pin</b> — A cylinder that may or may not have small handles at either end used to roll dough for pie crusts, biscuits, or cookies. pizza
+        \n\n<b>Rubber Spatula</b> — A flexible utensil used to remove food from spoons, side of bowls, and pans
+        \n\n<b>Serving Spoon</b> — A large type spoon used to serve food
+        \n\n<b>Slicing Knife</b> — A knife with long narrow flexible blades that may or may not be serrated
+        \n\n<b>Strainer</b> —A bowl type item with holes in it that is used to separate liquids from solid food.
+        \n\n<b>Meat Thermometer</b> — A thermometer used to measure the internal temperature of meat, especially roasts and steaks, and other cooked foods. The degree of "doneness" of meat correlates closely with the internal temperature, so that a thermometer reading indicates when it is cooked as desired.
+        \n\n<b>Tongs</b> — An instrument with two movable arms that are joined at one end, used for picking up and holding things.
+        \n\n<b>Utility Knife</b> — A knife that has a long and narrow blade that is generally used for cutting
+        \n\n<b>Vegetable Peeler</b> — A utensil used to peel the skin from vegetables
+        \n\n<b>Wire Whisk</b> — A utensil used to beat and blend ingredients or food, especially eggs
+        \n</string>
+    <string name="education_content_prep">
+          \n<b>Cross Chop</b>
+        \nUseful for herbs or vegetables when you don’t need consistently sized pieces. Hold the knife-handle with one hand and place your other palm on the back of the blade to guide it. Keep the tip of the knife down then raise and lower the handle to chop. This method is particularly safe for unsteady hands as your fingers aren’t near the cutting edge.
+
+        \n\n<b>Rock Chop</b>
+        \nSimilar to the cross chop, but keep the blade in place and use your second hand to feed what you are chopping into the blade. Be sure to keep your fingers curled with the tips perpendicular to your counter to ensure they are not cut if you lose focus.
+
+        \n\n<b>Julienne</b>
+        \nAfter cutting something into very thin slices (about ⅛ inch) cut it again into rectangular segments to make long, thin, pieces that resemble matchsticks. Most commonly used with vegetables.
+
+        \n\n<b>Dicing (Cube cuts)</b>
+        \nThere are many varieties of dicing, but most only differ in the desired size of the resulting pieces. The smallest (Brunoise) is achieved by cross-cutting a vegetable which has already been julienned, resulting in many, equal sized cubes.
+
+        \n\nBrunoise - ⅛ inch cubes
+        \nSmall - ¼ inch cubes
+        \nMedium - ½ inch cubes
+        \nLarge - ¾ inch cubes
+
+        \n\n<b>Mincing</b>
+        \nSimply cross-chop ingredients repeatedly with thinner slices until divided into very fine pieces. Generally mincing is not as uniform as dicing, and the resulting pieces should be much smaller.
+        \n</string>
+    <string name="education_content_storage">
+        \nSafe steps in food handling, cooking, and storage are essential to prevent foodborne illness. You can\'t see, smell, or taste harmful bacteria that may cause illness. In every step of food preparation, follow the four steps of the Food Safe Families campaign to keep food safe:
+        \n
+        \n<b>Clean</b> — Wash hands and surfaces often.
+        \n<b>Separate</b> — Don\'t cross-contaminate.
+        \n<b>Cook</b> — Cook to the right temperature.
+        \n<b>Chill</b> — Refrigerate promptly.
+
+        \n\n<b>Shopping</b>
+        \nPurchase refrigerated or frozen items after selecting your non-perishables.
+        \nNever choose meat or poultry in packaging that is torn or leaking.
+        \nDo not buy food past \"Sell-By,\" \"Use-By,\" or other expiration dates.
+
+        \n\n<b>Storage</b>
+        \nAlways refrigerate perishable food within 2 hours—1 hour when the temperature is above 90 °F (32.2 ºC).
+        \nCheck the temperature of your refrigerator and freezer with an appliance thermometer. The refrigerator should be at 40 °F (4.4 ºC) or below and the freezer at 0 °F (-17.7 ºC) or below.
+        \nCook or freeze fresh poultry, fish, ground meats, and variety meats within 2 days; other beef, veal, lamb, or pork, within 3 to 5 days.
+        \nPerishable food such as meat and poultry should be wrapped securely to maintain quality and to prevent meat juices from getting onto other food.
+        \nTo maintain quality when freezing meat and poultry in its original package, wrap the package again with foil or plastic wrap that is recommended for the freezer.
+        \nCanned foods are safe indefinitely as long as they are not exposed to freezing temperatures, or temperatures above 90 °F. If the cans look ok, they are safe to use. Discard cans that are dented, rusted, or swollen. High-acid canned food (tomatoes, fruits) will keep their best quality for 12 to 18 months; low-acid canned food (meats, vegetables) for 2 to 5 years.
+
+        \n\n<b>Preparation</b>
+        \nAlways wash hands with warm water and soap for 20 seconds before and after handling food.
+        \nDon\'t cross-contaminate. Keep raw meat, poultry, fish, and their juices away from other food. After cutting raw meats, wash cutting board, utensils, and countertops with hot, soapy water.
+        \nCutting boards, utensils, and countertops can be sanitized by using a solution of 1 tablespoon of unscented, liquid chlorine bleach in 1 gallon of water.
+        \nMarinate meat and poultry in a covered dish in the refrigerator.
+
+        \n\n<b>Thawing</b>
+        \nRefrigerator: The refrigerator allows slow, safe thawing. Make sure thawing meat and poultry juices do not drip onto other food.
+        \nCold Water: For faster thawing, place food in a leak-proof plastic bag. Submerge in cold tap water. Change the water every 30 minutes. Cook immediately after thawing.
+        \nMicrowave: Cook meat and poultry immediately after microwave thawing.
+
+        \n\n<b>Cooking</b>
+        \nCook all raw beef, pork, lamb and veal steaks, chops, and roasts to a minimum internal temperature of 145 °F (62.8 ºC) as measured with a food thermometer before removing meat from the heat source. For safety and quality, allow meat to rest for at least three minutes before carving or consuming. For reasons of personal preference, consumers may choose to cook meat to higher temperatures.
+        \nGround meats: Cook all raw ground beef, pork, lamb, and veal to an internal temperature of 160 °F (71.1 ºC) as measured with a food thermometer.
+        \nPoultry: Cook all poultry to an internal temperature of 165 °F (73.9 °C) as measured with a food thermometer.
+
+        \n\n<b>Serving</b>
+        \nHot food should be held at 140 °F (60 °C) or warmer.
+        \nCold food should be held at 40 °F (4.4 ºC) or colder.
+        \nWhen serving food at a buffet, keep food hot with chafing dishes, slow cookers, and warming trays. Keep food cold by nesting dishes in bowls of ice or use small serving trays and replace them often.
+        \nPerishable food should not be left out more than 2 hours at room temperature—1 hour when the temperature is above 90 °F (32.2 ºC).
+
+        \n\n<b>Leftovers</b>
+        \nDiscard any food left out at room temperature for more than 2 hours—1 hour if the temperature was above 90 °F (32.2 ºC).
+        \nPlace food into shallow containers and immediately put in the refrigerator or freezer for rapid cooling.
+        \nUse cooked leftovers within 4 days.
+        \nReheat leftovers to 165 °F (73.9 °C).
+        \n</string>
+
+    <string name="education_content_healthy_plate_intro">
+        \nThe Healthy Eating Plate, created by nutrition experts at Harvard School of Public Health and editors at Harvard Health Publications, was designed to address deficiencies in the U.S. Department of Agriculture (USDA)’s MyPlate. The Healthy Eating Plate provides detailed guidance, in a simple format, to help people make the best eating choices.
+        \n</string>
+
+    <string name="education_content_nutrition">
+        \nUse the Healthy Eating Plate as a guide for creating healthy, balanced meals—whether served on a plate or packed in a lunch box. Put a copy on the refrigerator as a daily reminder to create healthy, balanced meals!
+
+        \n\n<b>Make most of your meal vegetables and fruits – ½ of your plate:</b>
+        \nAim for color and variety, and remember that potatoes don’t count as vegetables on the Healthy Eating Plate because of their negative impact on blood sugar.
+
+        \n\n<b>Go for whole grains – ¼ of your plate:</b>
+        \nWhole and intact grains—whole wheat, barley, wheat berries, quinoa, oats, brown rice, and foods made with them, such as whole wheat pasta—have a milder effect on blood sugar and insulin than white bread, white rice, and other refined grains.
+
+        \n\n<b>Protein power – ¼ of your plate:</b>
+        \nFish, chicken, beans, and nuts are all healthy, versatile protein sources—they can be mixed into salads, and pair well with vegetables on a plate. Limit red meat, and avoid processed meats such as bacon and sausage.
+
+        \n\n<b>Healthy plant oils – in moderation:</b>
+        \nChoose healthy vegetable oils like olive, canola, soy, corn, sunflower, peanut, and others, and avoid partially hydrogenated oils, which contain unhealthy trans fats. Remember that low-fat does not mean “healthy.”
+
+        \n\n<b>Drink water, coffee, or tea:</b>
+        \nSkip sugary drinks, limit milk and dairy products to one to two servings per day, and limit juice to a small glass per day.
+
+        \n\n<b>Stay active:</b>
+        \nThe red figure running across the Healthy Eating Plate’s placemat is a reminder that staying active is also important in weight control.
+        \n\nThe main message of the Healthy Eating Plate is to focus on diet quality.
+        \n\nThe type of carbohydrate in the diet is more important than the amount of carbohydrate in the diet, because some sources of carbohydrate—like vegetables (other than potatoes), fruits, whole grains, and beans—are healthier than others.
+        \n\nThe Healthy Eating Plate also advises consumers to avoid sugary beverages, a major source of calories—usually with little nutritional value—in the American diet.
+        \n\nThe Healthy Eating Plate encourages consumers to use healthy oils, and it does not set a maximum on the percentage of calories people should get each day from healthy sources of fat. In this way, the Healthy Eating Plate recommends the opposite of the low-fat message promoted for decades by the USDA.
+        \n</string>
+
+    <string name="healthy_plate_citation">
+        \n<i>Copyright © 2011, Harvard University. For more information about The Healthy Eating Plate, please see The Nutrition Source, Department of Nutrition, Harvard School of Public Health, www.thenutritionsource.org, and Harvard Health Publications, www.health.harvard.edu.</i>
+        \n</string>
 </resources>

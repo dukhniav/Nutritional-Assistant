@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/mainImg"
         android:layout_width="411dp"
-        android:layout_height="280dp"
+        android:layout_height="270dp"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -18,28 +18,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/popular_healthy_foods" />
 
+    <Button
+        android:id="@+id/settingsBtn"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="casual"
+        android:text="@string/settings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="335dp"
+        android:layout_width="353dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainImg"
-        app:layout_constraintVertical_bias="0.22000003">
+        app:layout_constraintTop_toBottomOf="@+id/mainImg">
 
         <Button
             android:id="@+id/recipeBtn"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
             android:background="@color/design_default_color_primary"
             android:text="@string/find_recipes"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -55,8 +66,6 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
             android:background="@color/design_default_color_primary"
             android:text="@string/educational_references"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -72,8 +81,6 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
             android:background="@color/design_default_color_primary"
             android:text="@string/shopping_list"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -89,8 +96,6 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
             android:background="@color/design_default_color_primary"
             android:text="@string/my_recipes"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -101,4 +106,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recipeBtn" />
     </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
