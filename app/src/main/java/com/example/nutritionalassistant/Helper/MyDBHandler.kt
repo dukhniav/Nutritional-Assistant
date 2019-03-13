@@ -1,12 +1,11 @@
 package com.example.nutritionalassistant.helper
 
 import android.content.ContentValues
-import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) :
+class MyDBHandler(context: ConvertToRecipes, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -30,6 +29,7 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
     // ----------------------------- RECIPE --------------------------------------
     fun addRecipe(recipe: Recipe) {
         val values = ContentValues()
+        values.put(KEY_ID, recipe.id)
         values.put(COLUMN_RECIPE_LABEL, recipe.label)
         values.put(COLUMN_RECIPE_IMAGE, recipe.image)
         values.put(COLUMN_RECIPE_URL, recipe.url)

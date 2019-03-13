@@ -1,38 +1,28 @@
 package com.example.nutritionalassistant.helper
 
-import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import org.json.JSONArray
+import com.example.nutritionalassistant.FindRecipesActivity
 import org.json.JSONObject
-import java.math.BigDecimal
-import java.util.*
 import kotlin.collections.ArrayList
 
-class ConvertToRecipes : AppCompatActivity() {
+class ConvertToRecipes {
+
 
     fun convert(fileContents:String) {
+
         val dbHandler = MyDBHandler(this, null, null, 1)
 
-        Log.d("TAG", "d4")
         //Make sure content is similar to a JSON content
-        if (!fileContents.matches(("^\\{.*\\}$").toRegex()))
+        if (!fileContents.matches(("/.*\\S.*/").toRegex()))
         {
-            Log.d("TAG", "20")
-            Log.d("TAG", "$fileContents")
-            Log.d("TAG", "${fileContents.javaClass}")
+//            Log.d("TAG", "20")
+//            Log.d("TAG", "$fileContents")
+//            Log.d("TAG", "${fileContents.javaClass}")
             Log.d("TAG", "21")
-            print("...........>>>>>>>>>>>>>" + fileContents.toString())
+//            print("...........>>>>>>>>>>>>>" + fileContents.toString())
 
-
-            //val json = <init>(fileContents)
             var json = JSONObject(fileContents)
-            //json.toJSONArray("hits")
 
-//            JSONObject json = new JSONObject(fileContents)
-//          JSONArray hitList = json.getJSONArray("hits")
-
-//            Log.d("TAG", "d12")
             val hitList = json.getJSONArray("hits")
             Log.d("TAG", "d11")
             //Extract each recipes values and add new object to list
@@ -53,11 +43,14 @@ class ConvertToRecipes : AppCompatActivity() {
 
                 val dietArr = JSONRecipe.getJSONArray("dietLabels")
                 val diet: ArrayList<String> = ArrayList()
-                for (i in 0..(dietArr.length() - 1)) {
-                    diet.add(dietArr.getJSONObject(i).toString())
-                    Log.d("TAG", "d5")
+                if (dietArr.length() == 0){
+                    for (i in 0..(dietArr.length() - 1)) {
+                        diet.add(dietArr.getJSONObject(i).toString())
+                        Log.d("TAG", "d5")
 
+                    }
                 }
+
 
                 val healthObjs = JSONRecipe.getJSONArray("healthLabels")
                 var health = ""

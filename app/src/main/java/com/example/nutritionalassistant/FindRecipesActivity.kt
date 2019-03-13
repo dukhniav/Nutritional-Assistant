@@ -16,6 +16,9 @@ import kotlinx.android.synthetic.main.activity_find_recipes.*
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
+import android.os.StrictMode
+
+
 
 class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener{
     private var cookText: TextView? = null
@@ -76,6 +79,9 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_recipes)
 
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
         // shared pref
         val pref = getSharedPreferences("save", Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -109,16 +115,8 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
             Log.e("TAG", "d0")
             val file = recipe_search.recipeSearch(buildQuery(q="chicken", to=100))
 
-            Log.d("TAG", file)
-            print(file)
-            Log.d("TAG", "d1")
-
-            
             val convert = ConvertToRecipes()
-            Log.d("TAG", "d2")
-
             convert.convert(file)
-            Log.d("TAG", "d3")
 
             // Shared Preferences
             if (switchFuture.isChecked) {

@@ -1,6 +1,5 @@
 package com.example.nutritionalassistant
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -8,8 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
 import com.example.nutritionalassistant.helper.MyDBHandler
 import com.example.nutritionalassistant.helper.MyRecipeAdapter
-import com.example.nutritionalassistant.helper.Recipe
-import kotlinx.android.synthetic.main.recipe_row.*
 
 class ShowRecipesActivity : AppCompatActivity() {
 

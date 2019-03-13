@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
 import com.example.nutritionalassistant.helper.MyDBHandler
 import com.example.nutritionalassistant.helper.MyRecipeAdapter
-import com.example.nutritionalassistant.helper.Recipe
 
 class MyRecipesActivity : AppCompatActivity() {
 
