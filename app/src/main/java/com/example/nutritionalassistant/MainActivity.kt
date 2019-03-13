@@ -11,6 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        settingsBtn.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent) }
         recipeBtn.setOnClickListener {
             val intent = Intent(this, FindRecipesActivity::class.java)
             startActivity(intent) }

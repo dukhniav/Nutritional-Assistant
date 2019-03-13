@@ -24,28 +24,34 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView7"
+            <TextView
+                android:id="@+id/Whitespace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
+                android:text="@string/blank" />
+
+            <ImageView
+                android:id="@+id/healthyPlate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/healthyeatingplate" />
 
             <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/education_content_nutrition" />
-
-            <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/plateIntro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/education_content_healthy_plate_intro" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/plateExplanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/education_content_nutrition" />
+
+            <TextView
+                android:id="@+id/plateCitation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/healthy_plate_citation" />
