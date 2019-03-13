@@ -38,6 +38,9 @@
     <string name="min_budget">0</string>
     <string name="min_servings">1</string>
     <string name="signin">Sign In</string>
+    <string name="settings">More Settings...</string>
+    <string name="signout">Sign Out</string>
+    <string name="blank">\n</string>
     <string name="education_content_utensils">
           \n<b>Apple Corer</b> — This tool has a circular cutting edge that is forced down into the apple, allowing the apple to remain whole so it can then be easily sliced into sections for eating it out of hand or baking it whole with the outer skin. A tool used to extract the core from the apple without cutting the apple into sections and then individually cutting
         \n\n<b>Apple Slicer</b> — This tool is pressed down over the apple to make eight uniform slices and remove the core.
