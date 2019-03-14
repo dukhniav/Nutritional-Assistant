@@ -49,7 +49,11 @@ public class recipe_search {
             path.append("&from=" + opts.get("from"));
         }
         if (opts.containsKey("ingr")) {
-            path.append("&ingr=" + opts.get("ingr"));
+            if(opts.get("ingr") == null) {
+                path.append("&ingr=0");
+            } else {
+                path.append("&ingr=" + opts.get("ingr"));
+            }
         }
         if (opts.containsKey("diet")) {
             path.append("&diet=" + opts.get("diet"));
@@ -65,7 +69,12 @@ public class recipe_search {
             path.append("&calories=" + opts.get("calories"));
         }
         if (opts.containsKey("time")) {
-            path.append("&time=" + opts.get("time").replace("+", "%2B"));
+            Log.d("TAG", "TIME: " + opts.get("key"));
+            if(opts.get("time") == null) {
+                path.append("&time=0");
+            } else {
+                path.append("&time=" + opts.get("time").replace("+", "%2B"));
+            }
         }
         if (opts.containsKey("excluded")) {
             String[] list = opts.get("excluded").split(",");

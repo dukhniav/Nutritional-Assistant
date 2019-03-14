@@ -15,22 +15,82 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
-            <TextView
-                    android:id="@+id/recipeName"
-                    android:layout_width="279dp"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:scrollHorizontally="true"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-            />
-
-            <ImageView
-                    android:id="@+id/recipeImage"
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" android:layout_weight=".2">
+                <TextView
+                        android:id="@+id/recipeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:scrollHorizontally="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/design_default_color_primary_dark"/>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/caloriesLayout" android:layout_weight="1">
+                    <TextView
+                            android:text="Calories: "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/calLabel"
+                            android:layout_weight=".1"
+                            android:paddingLeft="50dp"
+                    />
+                    <TextView
+                            android:text="x"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/calories"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/servingsLayout" android:layout_weight="1">
+                    <TextView
+                            android:text="Servings: "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/servLabel"
+                            android:layout_weight=".1"
+                            android:paddingLeft="50dp"
+                    />
+                    <TextView
+                            android:text="x"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/servings"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/timeLayout">
+                    <TextView
+                            android:text="Time:"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/timeLabel"
+                            android:layout_weight="0.1"
+                            android:paddingLeft="50dp"
+                    />
+                    <TextView
+                            android:text="x"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/time"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight=".6">
+                <ImageView
+                        android:id="@+id/recipeImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
