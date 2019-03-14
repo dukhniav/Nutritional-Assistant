@@ -6,16 +6,12 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
-import android.util.Log
 import android.widget.SeekBar
 import android.widget.TextView
 import com.example.nutritionalassistant.helper.ConvertToRecipes
 import com.example.nutritionalassistant.helper.MyDBHandler
 import com.example.nutritionalassistant.helper.recipe_search
 import kotlinx.android.synthetic.main.activity_find_recipes.*
-import java.io.File
-import java.nio.file.Files
-import java.nio.file.StandardOpenOption
 import android.os.StrictMode
 
 
@@ -25,8 +21,8 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
     private var cookSeekbarView: SeekBar? = null
     private var budgetText: TextView? = null
     private var budgetSeekbarView: SeekBar? = null
-    private var difficultyText: TextView? = null
-    private var difficultySeekbarView: SeekBar? = null
+    private var ingredientsText: TextView? = null
+    private var ingredientsSeekbarView: SeekBar? = null
     private var servingsText: TextView? = null
     private var servingsSeekbarView: SeekBar? = null
 
@@ -43,11 +39,11 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         when(p0!!.id) {
             cookSeekbarView!!.id -> cookText!!.text = scale(progress,minCook,maxCook).toString()
             budgetSeekbarView!!.id -> budgetText!!.text = scale(progress,minCost,maxCost).toString()
-            difficultySeekbarView!!.id -> difficultyText!!.text = scale(progress,minIngredients,maxIngredients).toString()
+            ingredientsSeekbarView!!.id -> ingredientsText!!.text = scale(progress,minIngredients,maxIngredients).toString()
             servingsSeekbarView!!.id -> servingsText!!.text = scale(progress,minServings,maxServings).toString()
         }
 
-        buildQuery(q = "chicken", to = 100)
+        buildQuery()
     }
     /* -----------
      * Build Query
@@ -55,7 +51,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
      * q       : search string
      * from    : index of return to start at
      * to      : index of return to end at (returns a total of 'from' - 'to' entries)
-     * ingr    : max number of ingedients
+     * ingr    : max number of ingredients
      * diet    : "balanced", "high-protein", "high-fiber", "low-fat", "low-carb", or "low-sodium"
      * minCalories: minimum number of calories in the recipe
      * maxCalories: maximum number of calories
@@ -64,22 +60,16 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
      *
      * https://developer.edamam.com/edamam-docs-recipe-api
     */
-    fun buildQuery(q: String = "", from: Int = 0, to: Int = 100, ingr: Int = 99,
-                   diet: String = "balanced", maxCalories: Int = 9999,
-                   time: Int = 999, excluded: String = ""): Array<String> {
-//        var searchString = " "
-//
-//        if(recipeSearch != null){
-//            searchString = recipeSearch
-//        }
+    fun buildQuery(): Array<String> {
+
         val rQ = "q:" + recipeSearch.text
-        val rFrom = "from:$from"
-        val rTo = "to:$to"
-        val rIngr = "ingr:$ingr"
-        val rDiet = "diet:$diet"
-        val rCalories = "calories:$maxCalories"
-        val rTime = "time:$time"
-        val rExcluded = "excluded:$excluded"
+        val rFrom = "from:" + 0 //starting from 0
+        val rTo = "to:" + 100 // query results to 100
+        val rIngr = "ingr:" + ingredientsText!!.text
+        val rDiet = "diet:" + "balanced" // temporary until add options to pick
+        val rCalories = "calories:" + 9999 // temporary
+        val rTime = "time:" + cookText!!.text
+        val rExcluded = "excluded:" // nothing excluded
       
         return arrayOf(rQ, rFrom, rTo, rIngr, rDiet, rCalories, rTime, rExcluded)
 
@@ -111,9 +101,9 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         budgetSeekbarView = this.seekBudget
         budgetSeekbarView!!.setOnSeekBarChangeListener(this)
 
-        difficultyText = this.seekDifficultyText
-        difficultySeekbarView = this.seekDifficulty
-        difficultySeekbarView!!.setOnSeekBarChangeListener(this)
+        ingredientsText = this.seekIngredientsText
+        ingredientsSeekbarView = this.seekIngredients
+        ingredientsSeekbarView!!.setOnSeekBarChangeListener(this)
 
         servingsText = this.seekServingsText
         servingsSeekbarView = this.seekServings
@@ -121,7 +111,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
 
         seekCook.progress = pref.getInt("cook", 0)
         seekBudget.progress = pref.getInt("budget", 0)
-        seekDifficulty.progress = pref.getInt("difficulty", 0)
+        seekIngredients.progress = pref.getInt("difficulty", 0)
         seekServings.progress = pref.getInt("servings", 0)
         switchFuture.isChecked = pref.getBoolean("check", false)
 
@@ -130,12 +120,13 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
             val dbHandler = MyDBHandler(this, null, null, 1)
             val intent = Intent(this, ShowRecipesActivity::class.java)
 
-            val file = recipe_search.recipeSearch(buildQuery(q="chicken", to=100))
+            val file = recipe_search.recipeSearch(buildQuery())
 
             // convert json file to array of recipe objects
             val converter = ConvertToRecipes()
             val recipeAr = converter.convert(file)
 
+            // clear table before adding new recipes
             dbHandler.deleteAllRecipes()
 
             // add recipes to DB
@@ -148,7 +139,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
                 editor.putBoolean("check", true)
                 editor.putInt("cook", seekCook.progress)
                 editor.putInt("budget", seekBudget.progress)
-                editor.putInt("difficulty", seekDifficulty.progress)
+                editor.putInt("ingredients", seekIngredients.progress)
                 editor.putInt("servings", seekServings.progress)
                 editor.apply()
             } else {
@@ -156,7 +147,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
                 editor.remove("check")
                 editor.remove("cook")
                 editor.remove("budget")
-                editor.remove("difficulty")
+                editor.remove("ingredients")
                 editor.remove("servings")
                 editor.apply()
             }

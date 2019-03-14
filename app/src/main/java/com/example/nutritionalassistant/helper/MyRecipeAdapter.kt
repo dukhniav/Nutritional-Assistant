@@ -22,6 +22,10 @@ class MyRecipeAdapter(val recipeList: ArrayList<Recipe>): RecyclerView.Adapter<M
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.recipeName?.text = recipeList[position].label
+        holder?.recipeTime?.text = recipeList[position].totalTime?.toInt().toString()
+        holder?.recipeCalories?.text = recipeList[position].calories?.toInt().toString()
+        holder?.recipeServings?.text = recipeList[position].yieldServings?.toInt().toString()
+
         Picasso.with(holder.itemView.context)
             .load(recipeList[position].image)
             .into(holder.recipeImage)
@@ -41,5 +45,8 @@ class MyRecipeAdapter(val recipeList: ArrayList<Recipe>): RecyclerView.Adapter<M
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val recipeName = itemView.findViewById<TextView>(R.id.recipeName)!!
         val recipeImage = itemView.findViewById<ImageView>(R.id.recipeImage)!!
+        val recipeTime = itemView.findViewById<TextView>(R.id.time)!!
+        val recipeCalories = itemView.findViewById<TextView>(R.id.calories)!!
+        val recipeServings = itemView.findViewById<TextView>(R.id.servings)!!
     }
 }
