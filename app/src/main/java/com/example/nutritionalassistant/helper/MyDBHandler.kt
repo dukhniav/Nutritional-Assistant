@@ -83,6 +83,12 @@ class MyDBHandler(
         return recipe
     }
 
+    fun deleteAllRecipes() {
+        Log.d("TAG", "deleteAllRecipes")
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM $TABLE_RECIPE")
+        db.close()
+    }
     fun getAllRecipes() : ArrayList<Recipe> {
         Log.d("TAG", "getAllRecipes")
         val db = this.writableDatabase

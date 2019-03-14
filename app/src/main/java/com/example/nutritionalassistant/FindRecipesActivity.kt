@@ -67,7 +67,12 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
     fun buildQuery(q: String = "", from: Int = 0, to: Int = 100, ingr: Int = 99,
                    diet: String = "balanced", maxCalories: Int = 9999,
                    time: Int = 999, excluded: String = ""): Array<String> {
-        val rQ = "q:$q"
+//        var searchString = " "
+//
+//        if(recipeSearch != null){
+//            searchString = recipeSearch
+//        }
+        val rQ = "q:" + recipeSearch.text
         val rFrom = "from:$from"
         val rTo = "to:$to"
         val rIngr = "ingr:$ingr"
@@ -122,21 +127,21 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
 
 
         showRecipesBtn.setOnClickListener {
+            val dbHandler = MyDBHandler(this, null, null, 1)
             val intent = Intent(this, ShowRecipesActivity::class.java)
-            print(buildQuery())
-            Log.e("TAG", "d0")
+
             val file = recipe_search.recipeSearch(buildQuery(q="chicken", to=100))
 
-            Log.e("TAG", "d1a")
+            // convert json file to array of recipe objects
             val converter = ConvertToRecipes()
             val recipeAr = converter.convert(file)
 
-            val dbHandler = MyDBHandler(this, null, null, 1)
+            dbHandler.deleteAllRecipes()
 
+            // add recipes to DB
             for(i in recipeAr){
                 dbHandler.addRecipe(i)
             }
-
 
             // Shared Preferences
             if (switchFuture.isChecked) {
@@ -155,9 +160,6 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
                 editor.remove("servings")
                 editor.apply()
             }
-            //intent.putParcelableArrayListExtra("recipes", file)
-
-            //buildQuery(q = "chicken", to = 100)
 
             startActivity(intent)
         }
