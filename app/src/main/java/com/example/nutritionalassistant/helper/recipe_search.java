@@ -49,12 +49,11 @@ public class recipe_search {
             path.append("&from=" + opts.get("from"));
         }
         if (opts.containsKey("ingr")) {
-            if(opts.get("ingr") == null) {
-                path.append("&ingr=0");
-            } else {
+            if(Integer.parseInt(opts.get("ingr")) != 1) {
                 path.append("&ingr=" + opts.get("ingr"));
             }
         }
+
         if (opts.containsKey("diet")) {
             path.append("&diet=" + opts.get("diet"));
         }
@@ -66,13 +65,14 @@ public class recipe_search {
             }
         }
         if (opts.containsKey("calories")) {
-            path.append("&calories=" + opts.get("calories"));
+            if(Integer.parseInt(opts.get("calories")) != 0) {
+                // if null, don't add to url string
+                path.append("&calories=" + opts.get("calories"));
+            }
         }
         if (opts.containsKey("time")) {
-            Log.d("TAG", "TIME: " + opts.get("key"));
-            if(opts.get("time") == null) {
-                path.append("&time=0");
-            } else {
+            if(Integer.parseInt(opts.get("time")) != 1) {
+                // if null, don't add to url string
                 path.append("&time=" + opts.get("time").replace("+", "%2B"));
             }
         }
@@ -84,7 +84,11 @@ public class recipe_search {
             }
         }
 
-        Log.d("TAG", "Recipe: " + path.toString());
+        Log.d("TAG","SEARCH: |" + opts.get("q") + "|");
+        Log.d("TAG","Cook: " + opts.get("time"));
+        Log.d("TAG","Calories: " + opts.get("calories"));
+        Log.d("TAG","Ingredients: " + opts.get("ingr"));
+        Log.d("TAG","path: " + path.toString());
         return path.toString();
     }
 
