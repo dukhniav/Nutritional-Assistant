@@ -20,11 +20,13 @@ class MyDBHandler(
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_RECIPE_TABLE)
+        db?.execSQL(CREATE_MY_RECIPE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         // on upgrade, drop old tables
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_RECIPE")
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_MY_RECIPE")
         onCreate(db)
     }
 
@@ -132,7 +134,93 @@ class MyDBHandler(
         db.close()
         return result
     }
+    /* ---------------------------MY RECIPE---------------------------------- */
 
+    fun addMyRecipe(recipe: Recipe) {
+        Log.d("TAG", "AddMyRecipe")
+        val values = ContentValues()
+        values.put(COLUMN_RECIPE_LABEL, recipe.label)
+        values.put(COLUMN_RECIPE_IMAGE, recipe.image)
+        values.put(COLUMN_RECIPE_URL, recipe.url)
+        values.put(COLUMN_RECIPE_SHARE, recipe.shareAs)
+        values.put(COLUMN_RECIPE_YIELDSERVINGS, recipe.yieldServings)
+        values.put(COLUMN_RECIPE_INGREDIENTLINES, recipe.ingredientsLines)
+        values.put(COLUMN_RECIPE_CALORIES, recipe.calories)
+        values.put(COLUMN_RECIPE_TOTALTIME, recipe.totalTime)
+        values.put(COLUMN_RECIPE_SOURCE, recipe.source)
+
+        Log.d("TAG", "Before WritableDatabase")
+        val db = this.writableDatabase
+        Log.d("TAG", "WritableDatabase")
+
+        db.insert(TABLE_MY_RECIPE, null, values)
+        db.close()
+        Log.d("TAG", "works")
+    }
+
+    fun findMyRecipe(recipeLabel: String): Recipe? {
+        Log.d("TAG", "findRecipe")
+        val db = this.writableDatabase
+
+        val query = "SELECT * FROM $TABLE_MY_RECIPE WHERE $COLUMN_RECIPE_LABEL = \"$recipeLabel\""
+
+        val cursor = db.rawQuery(query, null)
+
+        var recipe: Recipe? = null
+
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst()
+
+            val label = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_LABEL))
+            val image = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_IMAGE))
+            val url = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_URL))
+            val shareAs = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SHARE))
+            val yieldServings = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_YIELDSERVINGS))
+            val ingredients = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_INGREDIENTLINES))
+            val calories = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_CALORIES))
+            val totalTime = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_TOTALTIME))
+            val source = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SOURCE))
+
+            recipe = Recipe(label, image, url, shareAs, yieldServings, ingredients, calories, totalTime, source)
+            cursor.close()
+        }
+        db.close()
+        return recipe
+    }
+
+    fun deleteAllMyRecipes() {
+        Log.d("TAG", "deleteAllRecipes")
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM $TABLE_MY_RECIPE")
+        db.close()
+    }
+    fun getAllMyRecipes() : ArrayList<Recipe> {
+        Log.d("TAG", "getAllRecipes")
+        val db = this.writableDatabase
+        val recArray = ArrayList<Recipe>()
+
+        val cursor: Cursor = db.rawQuery("SELECT * FROM $TABLE_MY_RECIPE", null)
+
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            do {
+                val recLabel = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_LABEL))
+                val recImage = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_IMAGE))
+                val recUrl = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_URL))
+                val recShare = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SHARE))
+                val recYield = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_YIELDSERVINGS))
+                val recIngredient = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_INGREDIENTLINES))
+                val recCalories = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_CALORIES))
+                val recTime = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_TOTALTIME))
+                val recSource = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SOURCE))
+
+                val recipe = Recipe(recLabel, recImage, recUrl, recShare, recYield, recIngredient, recCalories, recTime, recSource)
+                recArray.add(recipe)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return recArray
+    }
     /* ---------------------------------------------------------------------- */
     companion object {
         //db version
@@ -144,12 +232,9 @@ class MyDBHandler(
         // table names
         private const val TABLE_RECIPE = "recipe"
         private const val TABLE_MY_RECIPE = "my_recipe"
-        private const val TABLE_SAVE = "save"
-        private const val TABLE_INGREDIENTS = "ingredients"
 
         // common column names
         private const val KEY_ID = "_id"
-        private const val COLUMN_CREATED_AT = "created_at"
 
         // recipe table - column names
         private const val COLUMN_RECIPE_LABEL = "recipe_label"
@@ -175,11 +260,18 @@ class MyDBHandler(
                 + COLUMN_RECIPE_TOTALTIME + " FLOAT, "
                 + COLUMN_RECIPE_SOURCE + " STRING" +  ");")
 
-        //  recipe
+        //  my recipe
         private const val CREATE_MY_RECIPE_TABLE = ("CREATE TABLE " + TABLE_MY_RECIPE
                 + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_RECIPE_LABEL + " TEXT, "
-                + COLUMN_CREATED_AT + " DATETIME" + ")")
+                + COLUMN_RECIPE_IMAGE + " TEXT, "
+                + COLUMN_RECIPE_URL + " TEXT, "
+                + COLUMN_RECIPE_SHARE + " TEXT, "
+                + COLUMN_RECIPE_YIELDSERVINGS + " FLOAT, "
+                + COLUMN_RECIPE_INGREDIENTLINES + " TEXT, "
+                + COLUMN_RECIPE_CALORIES + " FLOAT, "
+                + COLUMN_RECIPE_TOTALTIME + " FLOAT, "
+                + COLUMN_RECIPE_SOURCE + " STRING" +  ");")
     }
 
 }

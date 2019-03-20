@@ -24,6 +24,11 @@ class ShowRecipeActivity : AppCompatActivity() {
         showRecipeSource.text = currentRecipe?.source
 
 
+        showRecipeSave.setOnClickListener {
+            if (currentRecipe != null) {
+                dbHandler.addMyRecipe(currentRecipe)
+            }
+        }
 
         showRecipeSource.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
