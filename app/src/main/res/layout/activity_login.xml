@@ -1,81 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Login">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.9"
+                android:background="@drawable/background_food"
+                tools:context=".Login">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnLogin"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@id/editText10"
+            android:ems="10"
+            android:background="@drawable/rounded_edittext"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            android:textSize="20sp"
+            android:textColor="#333333"
+            android:drawablePadding="25dp"
+            android:hint="Enter email"
+            android:textColorHint="#d8d8d8"
+            android:paddingTop="5dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/icon_mail_black"
+            android:fontFamily="sans-serif"
+            android:layout_alignParentTop="true"/>
+
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/editText11"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:background="@drawable/rounded_eddittext_bottom"
+            android:layout_below="@+id/editText10"
+            android:textSize="20sp"
+            android:textColor="#333333"
+            android:cursorVisible="true"
+            android:drawablePadding="25dp"
+            android:hint="Enter password"
+            android:textColorHint="#d8d8d8"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingStart="20dp"
+            android:drawableStart="@drawable/icon_pass_black"
+    />
 
     <Button
-        android:id="@+id/testBtn"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="**DEBUG**"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="0dp"
-        android:layout_height="243dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="347dp"
-            android:layout_height="45dp"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/editText2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="347dp"
-            android:layout_height="44dp"
-            android:ems="10"
-            android:hint="password"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="159dp"
             android:layout_height="wrap_content"
-            android:text="@string/signin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
-    </android.support.constraint.ConstraintLayout>
+            android:layout_width="match_parent"
+            android:id="@+id/loginBtn"
+            android:background="@drawable/rounded_button"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/editText11"
+            android:text="Sign in"
+            android:textAllCaps="false" android:capitalize="none"/>
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/googleBtn"
+            android:background="@drawable/rounded_button2"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/loginBtn"
+            android:text="Sign in with Google"
+            android:drawableLeft="@drawable/googleg_standard_color_18"
+            android:textAllCaps="false" android:capitalize="none"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/textView13"
+              android:layout_marginTop="30dp"
+              android:textSize="20dp"
+              android:textColor="#ffffff"
+              android:layout_marginLeft="30dp"
+              android:layout_marginRight="30dp"
+              android:textAlignment="center"
+              android:clickable="true"
+              android:focusable="true"
+              android:layout_below="@id/googleBtn"
+              android:text="Not a User? Register!"
+    />
+
+    <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/debug"
+            android:layout_marginTop="21dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal|bold"
+            android:text="DEBUG"
+            android:layout_marginEnd="1dp" android:layout_alignEnd="@+id/editText10"
+            android:layout_alignParentTop="true" style="@style/Widget.AppCompat.Button.Colored"/>
+</RelativeLayout>
+

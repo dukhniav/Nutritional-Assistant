@@ -34,7 +34,7 @@ class Login : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        testBtn.setOnClickListener {
+        debug.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
     }
@@ -48,7 +48,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        btnLogin.setOnClickListener {
+        googleBtn.setOnClickListener {
             signIn()
         }
     }

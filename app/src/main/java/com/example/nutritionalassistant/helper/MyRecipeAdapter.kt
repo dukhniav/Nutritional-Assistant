@@ -34,6 +34,7 @@ class MyRecipeAdapter(val recipeList: ArrayList<Recipe>): RecyclerView.Adapter<M
 
         holder.itemView.recipe_row.setOnClickListener{
             val intent = Intent(holder.itemView.recipe_row.context, ShowRecipeActivity::class.java)
+            intent.putExtra("title", holder.recipeName.text as String?)
             holder.itemView.recipe_row.context.startActivity(intent)
         }
     }
