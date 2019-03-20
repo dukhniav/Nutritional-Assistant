@@ -40,6 +40,7 @@ class MyDBHandler(
         values.put(COLUMN_RECIPE_INGREDIENTLINES, recipe.ingredientsLines)
         values.put(COLUMN_RECIPE_CALORIES, recipe.calories)
         values.put(COLUMN_RECIPE_TOTALTIME, recipe.totalTime)
+        values.put(COLUMN_RECIPE_SOURCE, recipe.source)
 
         Log.d("TAG", "Before WritableDatabase")
         val db = this.writableDatabase
@@ -51,9 +52,10 @@ class MyDBHandler(
     }
 
     fun findRecipe(recipeLabel: String): Recipe? {
-        val query = "SELECT * FROM $TABLE_RECIPE WHERE $COLUMN_RECIPE_LABEL = \"$recipeLabel\""
-
+        Log.d("TAG", "findRecipe")
         val db = this.writableDatabase
+
+        val query = "SELECT * FROM $TABLE_RECIPE WHERE $COLUMN_RECIPE_LABEL = \"$recipeLabel\""
 
         val cursor = db.rawQuery(query, null)
 
@@ -62,21 +64,17 @@ class MyDBHandler(
         if (cursor.moveToFirst()) {
             cursor.moveToFirst()
 
-            val id = Integer.parseInt(cursor.getString(0))
-            val label = cursor.getString(1)
-            val image = cursor.getString(2)
-            val url = cursor.getString(3)
-            val shareAs = cursor.getString(4)
-            val yieldServings = cursor.getString(5).toFloat()
-            val ingredients = cursor.getString(6)
-            val calories = cursor.getString(7).toFloat()
-            val totalTime = cursor.getString(8).toFloat()
+            val label = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_LABEL))
+            val image = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_IMAGE))
+            val url = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_URL))
+            val shareAs = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SHARE))
+            val yieldServings = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_YIELDSERVINGS))
+            val ingredients = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_INGREDIENTLINES))
+            val calories = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_CALORIES))
+            val totalTime = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_TOTALTIME))
+            val source = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SOURCE))
 
-            recipe = Recipe(id, label, image,
-                        url, shareAs, yieldServings, ingredients,
-                        calories, totalTime)
-
-
+            recipe = Recipe(label, image, url, shareAs, yieldServings, ingredients, calories, totalTime, source)
             cursor.close()
         }
         db.close()
@@ -107,7 +105,9 @@ class MyDBHandler(
                 val recIngredient = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_INGREDIENTLINES))
                 val recCalories = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_CALORIES))
                 val recTime = cursor.getFloat(cursor.getColumnIndex(COLUMN_RECIPE_TOTALTIME))
-                val recipe = Recipe(recLabel, recImage, recUrl, recShare, recYield, recIngredient, recCalories, recTime)
+                val recSource = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_SOURCE))
+
+                val recipe = Recipe(recLabel, recImage, recUrl, recShare, recYield, recIngredient, recCalories, recTime, recSource)
                 recArray.add(recipe)
             } while (cursor.moveToNext())
         }
@@ -132,87 +132,7 @@ class MyDBHandler(
         db.close()
         return result
     }
-//
-//    fun addIngredients(url: String, ingredients: ArrayList<String>) {
-//        val values = ContentValues()
-//        for (i in 0 until ingredients.size) {
-//            values.put(COLUMN_ING_SOURCE, url)
-//            values.put(COLUMN_INGREDIENT, ingredients[i])
-//        }
-//
-//        val db = this.writableDatabase
-//
-//        db.insert(TABLE_INGREDIENTS, null, values)
-//        db.close()
-//    }
-//
-//    fun findIngredient(url: String): ArrayList<String> {
-//
-//        val query = "SELECT *TABLE_$TABLE_INGREDIENTS WHERE $COLUMN_ING_SOURCE = \"$url\""
-//
-//        val db = this.writableDatabase
-//
-//        val cursor = db.rawQuery(query, null)
-//
-//        if (cursor.moveToFirst()) {
-//            cursor.moveToFirst()
-//
-//            val id = Integer.parseInt(cursor.getString(0))
-//            val url = cursor.getString(1)
-//            val ingredient = cursor.getString(2)
-//
-//            cursor.close()
-//        }
-//        db.close()
-//        return recipe
-//
-//
-//    }
-    // ----------------------------- SAVE --------------------------------------
-//    fun savePref(cook: Int, budget: Int, dif: Int, serv: Int) {
-//        val values = ContentValues()
-//        values.put(COLUMN_COOK_TIME, cook)
-//        values.put(COLUMN_BUDGET, budget)
-//        values.put(COLUMN_DIFFICULTY, dif)
-//        values.put(COLUMN_SERVINGS, serv)
-//
-//        val db = this.writableDatabase
-//
-//        db.insert(TABLE_SAVE, null, values)
-//        db.close()
-//    }
-//    fun getSave(): ArrayList<Int>? {
-//        val query = "SELECT * FROM $TABLE_SAVE"
-//
-//        val db = this.writableDatabase
-//
-//        val save:ArrayList<Int> = ArrayList()
-//
-//        val cursor = db.rawQuery(query, null)
-//
-//        if (cursor.moveToFirst()) {
-//            cursor.moveToFirst()
-//
-//            val cook = Integer.parseInt(cursor.getString(0))
-//            val budget = Integer.parseInt(cursor.getString(1))
-//            val dif = Integer.parseInt(cursor.getString(2))
-//            val serv = Integer.parseInt(cursor.getString(3))
-//
-//            save.add(cook)
-//            save.add(budget)
-//            save.add(dif)
-//            save.add(serv)
-//
-//            cursor.close()
-//        }
-//        db.close()
-//        return save
-//    }
-//    fun deleteSave() {
-//        val db = this.writableDatabase
-//        db.execSQL("DROP TABLE If EXISTS $TABLE_SAVE")
-//        db.close()
-//    }
+
     /* ---------------------------------------------------------------------- */
     companion object {
         //db version
@@ -240,26 +160,7 @@ class MyDBHandler(
         private const val COLUMN_RECIPE_INGREDIENTLINES = "recipe_ingredient_lines"
         private const val COLUMN_RECIPE_CALORIES = "recipe_calories"
         private const val COLUMN_RECIPE_TOTALTIME = "recipe_total_time"
-
-        // ingredients table - column names
-        private const val COLUMN_ING_SOURCE = "ingredient_source"
-        private const val COLUMN_INGREDIENT = "ingredient"
-
-//        // SAVE VALS - COL NAMES
-//        private const val COLUMN_SAVE_BOOL = "save_bool"
-//        private const val COLUMN_COOK_TIME = "cook_time"
-//        private const val COLUMN_BUDGET = "budget"
-//        private const val COLUMN_DIFFICULTY = "difficulty"
-//        private const val COLUMN_SERVINGS = "servings"
-
-        // table create statements
-//        //SAVE
-//        private const val CREATE_SAVE_TABLE = ("CREATE TABLE " + TABLE_SAVE
-//                + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
-//                + COLUMN_COOK_TIME + " TEXT, "
-//                + COLUMN_BUDGET + " TEXT, "
-//                + COLUMN_DIFFICULTY + " TEXT, "
-//                + COLUMN_SERVINGS + " TEXT" + ")")
+        private const val COLUMN_RECIPE_SOURCE = "source"
 
         //  recipe
         private const val CREATE_RECIPE_TABLE = ("CREATE TABLE " + TABLE_RECIPE
@@ -271,20 +172,14 @@ class MyDBHandler(
                 + COLUMN_RECIPE_YIELDSERVINGS + " FLOAT, "
                 + COLUMN_RECIPE_INGREDIENTLINES + " TEXT, "
                 + COLUMN_RECIPE_CALORIES + " FLOAT, "
-                + COLUMN_RECIPE_TOTALTIME + " FLOAT" + ");")
+                + COLUMN_RECIPE_TOTALTIME + " FLOAT, "
+                + COLUMN_RECIPE_SOURCE + " STRING" +  ");")
 
         //  recipe
         private const val CREATE_MY_RECIPE_TABLE = ("CREATE TABLE " + TABLE_MY_RECIPE
                 + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_RECIPE_LABEL + " TEXT, "
                 + COLUMN_CREATED_AT + " DATETIME" + ")")
-
-
-        // INGREDIENTS
-        private const val CREATE_INGREDIENTS_TABLE = ("CREATE TABLE " + TABLE_INGREDIENTS
-                + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
-                + COLUMN_ING_SOURCE + " TEXT, "
-                + COLUMN_INGREDIENT + " TEXT" + ")")
     }
 
 }

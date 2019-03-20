@@ -15,7 +15,7 @@ class SettingsActivity : AppCompatActivity() {
         signoutBtn.setOnClickListener {
             signOut()
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
     }

@@ -65,7 +65,7 @@ public class recipe_search {
             }
         }
         if (opts.containsKey("calories")) {
-            if(Integer.parseInt(opts.get("calories")) != 0) {
+            if((Integer.parseInt(opts.get("calories")) != 0) || (Integer.parseInt(opts.get("calories")) != 1)){
                 // if null, don't add to url string
                 path.append("&calories=" + opts.get("calories"));
             }
@@ -84,11 +84,6 @@ public class recipe_search {
             }
         }
 
-        Log.d("TAG","SEARCH: |" + opts.get("q") + "|");
-        Log.d("TAG","Cook: " + opts.get("time"));
-        Log.d("TAG","Calories: " + opts.get("calories"));
-        Log.d("TAG","Ingredients: " + opts.get("ingr"));
-        Log.d("TAG","path: " + path.toString());
         return path.toString();
     }
 

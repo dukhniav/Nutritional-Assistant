@@ -46,6 +46,8 @@ class ConvertToRecipes : AppCompatActivity() {
                 val yieldServ = (JSONRecipe.getString("yield")).toFloat()
                 val time = (JSONRecipe.getString("totalTime")).toFloat()
                 val calories = (JSONRecipe.getString("calories")).toFloat()
+                val source = JSONRecipe.getString("source")
+                Log.d("TAG", "SOURCE: " + source)
 
                 val dietArr = JSONRecipe.getJSONArray("dietLabels")
                 val diet: ArrayList<String> = ArrayList()
@@ -66,7 +68,6 @@ class ConvertToRecipes : AppCompatActivity() {
                     sb.append(healthObjs[i])
                 }
                 health = sb.toString()
-                Log.d("TAG", "d6")
 
                 val cautionObjs = JSONRecipe.getJSONArray("cautions")
                 var caution = ""
@@ -81,14 +82,10 @@ class ConvertToRecipes : AppCompatActivity() {
                     sb.append(ingredientsList[i])
                 }
                 ingredients = sb.toString()
-                Log.d("TAG", "d7")
 
-                recipe = Recipe(label, image, url, share, yieldServ, ingredients, calories, time)
+                recipe = Recipe(label, image, url, share, yieldServ, ingredients, calories, time, source)
 
-                Log.d("TAG", "d8")
                 recipeAr.add(recipe)
-                //dbHandler.addRecipe(recipe)
-                Log.d("TAG", "d9")
             }
 
         }
