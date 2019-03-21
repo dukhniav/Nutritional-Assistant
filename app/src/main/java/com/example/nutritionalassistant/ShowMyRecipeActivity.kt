@@ -51,14 +51,4 @@ class ShowMyRecipeActivity : AppCompatActivity() {
                 .load(currentRecipe?.image)
                 .into(showMyRecipeImage)
     }
-
-
-//    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            this.finish()
-//            startActivity(intent)
-//        }
-//        return super .onKeyDown(keyCode, event)
-//    }
 }

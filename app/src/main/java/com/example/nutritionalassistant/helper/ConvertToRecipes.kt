@@ -80,6 +80,7 @@ class ConvertToRecipes : AppCompatActivity() {
                 var ingredients = ""
                 for (i in 0..(ingredientsList.length() - 1)) {
                     sb.append(ingredientsList[i])
+                    sb.append("\n")
                 }
                 ingredients = sb.toString()
 

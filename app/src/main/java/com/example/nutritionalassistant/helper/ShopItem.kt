@@ -1,27 +1,48 @@
 package com.example.nutritionalassistant.helper
 
-class ShopItem {
+import android.os.Parcel
+import android.os.Parcelable
 
-    var id: Int? = 0
+class ShopItem() : Parcelable{
+
+    var objectId: Int? = 0
     var name: String? = null
     var recipe: String? = null
-    var price: Double? = 0.0
-    var calories: Int? = 0
-    var quantity: Int? = 0
 
-    constructor(id: Int, name: String, recipe: String, price: Double, calories: Int, quantity: Int) {
-        this.id = id
-        this.name = name
-        this.recipe = recipe
-        this.price = price
-        this.calories = calories
+    constructor(parcel: Parcel) : this() {
+        objectId = parcel.readValue(Int::class.java.classLoader) as? Int
+        name = parcel.readString()
+        recipe = parcel.readString()
     }
 
-    constructor(name: String, recipe: String, price: Double, calories: Int, quantity: Int){
+    constructor(name: String, recipe: String) : this() {
         this.name = name
         this.recipe = recipe
-        this.price = price
-        this.calories = calories
-        this.quantity = quantity
+    }
+
+    constructor(objectId: Int, name: String, recipe: String, done: Boolean) : this() {
+        this.objectId = objectId
+        this.name = name
+        this.recipe = recipe
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(objectId)
+        parcel.writeString(name)
+        parcel.writeString(recipe)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<ShopItem> {
+        override fun createFromParcel(parcel: Parcel): ShopItem {
+            return ShopItem(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ShopItem?> {
+            return arrayOfNulls(size)
+        }
     }
 }

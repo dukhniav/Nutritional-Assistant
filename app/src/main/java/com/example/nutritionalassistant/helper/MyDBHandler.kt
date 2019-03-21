@@ -21,12 +21,14 @@ class MyDBHandler(
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_RECIPE_TABLE)
         db?.execSQL(CREATE_MY_RECIPE_TABLE)
+        db?.execSQL(CREATE_TABLE_SHOPPING_LIST)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         // on upgrade, drop old tables
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_RECIPE")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_MY_RECIPE")
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_SHOPPING_LIST")
         onCreate(db)
     }
 
@@ -250,6 +252,7 @@ class MyDBHandler(
         // table names
         private const val TABLE_RECIPE = "recipe"
         private const val TABLE_MY_RECIPE = "my_recipe"
+        private const val TABLE_SHOPPING_LIST = "shoppping_list"
 
         // common column names
         private const val KEY_ID = "_id"
@@ -264,6 +267,10 @@ class MyDBHandler(
         private const val COLUMN_RECIPE_CALORIES = "recipe_calories"
         private const val COLUMN_RECIPE_TOTALTIME = "recipe_total_time"
         private const val COLUMN_RECIPE_SOURCE = "source"
+
+        // shopping list - column names
+        private const val COLUMN_SHOP_NAME = "shopping_name"
+        private const val COLUMN_SHOP_RECIPE = "shopping_recipe"
 
         //  recipe
         private const val CREATE_RECIPE_TABLE = ("CREATE TABLE " + TABLE_RECIPE
@@ -290,6 +297,12 @@ class MyDBHandler(
                 + COLUMN_RECIPE_CALORIES + " FLOAT, "
                 + COLUMN_RECIPE_TOTALTIME + " FLOAT, "
                 + COLUMN_RECIPE_SOURCE + " STRING" +  ");")
+
+        //  shopping list
+        private const val CREATE_TABLE_SHOPPING_LIST = ("CREATE TABLE " + TABLE_SHOPPING_LIST
+                + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
+                + COLUMN_SHOP_NAME + " TEXT, "
+                + COLUMN_SHOP_RECIPE + " TEXT" +  ");")
     }
 
 }
