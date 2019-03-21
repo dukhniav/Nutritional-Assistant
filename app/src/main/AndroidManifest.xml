@@ -16,7 +16,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ShowMyRecipeActivity">
+        <activity android:name=".ShowMyRecipeActivity"
+            android:parentActivityName=".MainActivity"
+            >
+
         </activity>
         <activity android:name=".ShowRecipeActivity">
         </activity>
@@ -24,7 +27,9 @@
         </activity>
         <activity android:name=".IngredientsActivity">
         </activity>
-        <activity android:name=".MyRecipesActivity"/>
+        <activity android:name=".MyRecipesActivity"
+
+            />
         <activity
                 android:name=".references.FoodStorage"
                 android:label="@string/title_activity_food_storage"

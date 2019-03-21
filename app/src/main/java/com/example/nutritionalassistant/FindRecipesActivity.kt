@@ -76,7 +76,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         val rCalories = "calories:" + caloriesText!!.text
         val rTime = "time:" + cookText!!.text
         val rExcluded = "excluded:" // nothing excluded
-      
+
         return arrayOf(rQ, rFrom, rTo, rIngr, rDiet, rCalories, rTime, rExcluded)
 
     }
@@ -125,6 +125,7 @@ class FindRecipesActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener
         showRecipesBtn.setOnClickListener {
             val dbHandler = MyDBHandler(this, null, null, 1)
             val intent = Intent(this, ShowRecipesActivity::class.java)
+            intent.putExtra("context", "FindRecipesActivity")
 
             val file = recipe_search.recipeSearch(buildQuery())
 

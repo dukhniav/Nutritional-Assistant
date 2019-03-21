@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
-import com.example.nutritionalassistant.helper.ConvertToRecipes
 import com.example.nutritionalassistant.helper.MyDBHandler
-import com.example.nutritionalassistant.helper.MyRecipeAdapter
+import com.example.nutritionalassistant.helper.RecipeAdapter
 
 class ShowRecipesActivity : AppCompatActivity() {
 
@@ -23,7 +22,7 @@ class ShowRecipesActivity : AppCompatActivity() {
 
         val recipes = dbHandler.getAllRecipes()
 
-        var adapter = MyRecipeAdapter(recipes)
+        var adapter = RecipeAdapter(recipes)
         rv.adapter = adapter
     }
 }
