@@ -23,8 +23,9 @@ class ShowRecipeActivity : AppCompatActivity() {
         val recipeUrl = currentRecipe?.url
 
         showRecipeTitle.text = currentRecipe?.label
-
         showRecipeSource.text = currentRecipe?.source
+        showRecipeCalories.text = currentRecipe?.calories?.toInt().toString()
+        showRecipeCook.text = currentRecipe?.totalTime?.toInt().toString()
 
 
         showRecipeSave.setOnClickListener {
@@ -34,10 +35,7 @@ class ShowRecipeActivity : AppCompatActivity() {
             }
         }
 
-        Log.d("TAG", "Ingredients: " + currentRecipe?.ingredientsLines.toString())
-
-        //Temp - TODO: replace with button
-        textView15.setOnClickListener {
+        showRecipeIngredients.setOnClickListener {
             val intent = Intent(this, IngredientsActivity::class.java)
 
             var ingredientArr: List<String>
@@ -46,10 +44,10 @@ class ShowRecipeActivity : AppCompatActivity() {
 
             ingredientArr = ingredientLines?.split(delimiters = *arrayOf("\n"))!!
 
-            for (i in 0..(ingredientArr.size - 1)) {
+            for (i in 1..(ingredientArr.size - 2)) {
                 shopItemArr.add(ShopItem(ingredientArr[i], currentRecipe.label.toString()))
             }
-            val bundle : Bundle = Bundle()
+            val bundle = Bundle()
             bundle.putParcelableArrayList("shopItemArr", shopItemArr)
 
             intent.putExtra("bundle", bundle)
@@ -70,5 +68,3 @@ class ShowRecipeActivity : AppCompatActivity() {
             .into(showRecipeImage)
     }
 }
-
-private fun Bundle.putParcelableArrayList(s: String, shopItemArr: ArrayList<ShopItem>) {}

@@ -241,6 +241,59 @@ class MyDBHandler(
         cursor.close()
         return recArray
     }
+
+    /* ---------------------Shopping List ------------------------------------*/
+    fun addShopItem(item: ShopItem) {
+        val values = ContentValues()
+        values.put(COLUMN_SHOP_NAME, item.name)
+        values.put(COLUMN_SHOP_RECIPE, item.recipe)
+
+        val db = this.writableDatabase
+
+        db.insert(TABLE_SHOPPING_LIST, null, values)
+        db.close()
+    }
+    fun deleteShoppingListItem(itemName: String): Boolean {
+        var result = false
+        val query = "SELECT * FROM $TABLE_SHOPPING_LIST WHERE $COLUMN_SHOP_NAME = \"$itemName\""
+
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            val label = cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))
+            db.delete(TABLE_SHOPPING_LIST, "$COLUMN_SHOP_NAME = ?", arrayOf(label))
+
+            cursor.close()
+            result = true
+        }
+        db.close()
+        return result
+    }
+    fun deleteShoppingList() {
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM $TABLE_SHOPPING_LIST")
+        db.close()
+    }
+    fun getShoppingList() : ArrayList<ShopItem> {
+        val db = this.writableDatabase
+        val itemArray = ArrayList<ShopItem>()
+
+        val cursor: Cursor = db.rawQuery("SELECT * FROM $TABLE_SHOPPING_LIST", null)
+
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            do {
+                val shopName = cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_NAME))
+                val shopRecipe = cursor.getString(cursor.getColumnIndex(COLUMN_SHOP_RECIPE))
+
+                val item = ShopItem(shopName, shopRecipe)
+                itemArray.add(item)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return itemArray
+    }
     /* ---------------------------------------------------------------------- */
     companion object {
         //db version
