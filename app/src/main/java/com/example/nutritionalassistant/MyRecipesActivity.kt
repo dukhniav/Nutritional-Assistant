@@ -1,11 +1,12 @@
 package com.example.nutritionalassistant
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.widget.LinearLayout
-import com.example.nutritionalassistant.helper.ConvertToRecipes
 import com.example.nutritionalassistant.helper.MyDBHandler
 import com.example.nutritionalassistant.helper.MyRecipeAdapter
 
@@ -24,5 +25,11 @@ class MyRecipesActivity : AppCompatActivity() {
 
         var adapter = MyRecipeAdapter(recipes)
         rv.adapter = adapter
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        this.finish()
+        startActivity(intent)
     }
 }

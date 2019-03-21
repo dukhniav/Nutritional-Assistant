@@ -194,6 +194,24 @@ class MyDBHandler(
         db.execSQL("DELETE FROM $TABLE_MY_RECIPE")
         db.close()
     }
+
+    fun deleteMyRecipe(recipeLabel: String): Boolean {
+        var result = false
+        val query = "SELECT * FROM $TABLE_MY_RECIPE WHERE $COLUMN_RECIPE_LABEL = \"$recipeLabel\""
+
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            val label = cursor.getString(cursor.getColumnIndex(COLUMN_RECIPE_LABEL))
+            db.delete(TABLE_MY_RECIPE, "$COLUMN_RECIPE_LABEL = ?", arrayOf(label))
+
+            cursor.close()
+            result = true
+        }
+        db.close()
+        return result
+    }
     fun getAllMyRecipes() : ArrayList<Recipe> {
         Log.d("TAG", "getAllRecipes")
         val db = this.writableDatabase

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.nutritionalassistant.helper.MyDBHandler
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +28,7 @@ class ShowRecipeActivity : AppCompatActivity() {
         showRecipeSave.setOnClickListener {
             if (currentRecipe != null) {
                 dbHandler.addMyRecipe(currentRecipe)
+                Toast.makeText(this, "Recipe added!", Toast.LENGTH_LONG).show()
             }
         }
 

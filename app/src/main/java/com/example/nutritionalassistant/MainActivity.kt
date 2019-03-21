@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent) }
         myRecipesBtn.setOnClickListener {
             val intent = Intent(this, MyRecipesActivity::class.java)
+            intent.putExtra("context", "MainActivity")
             startActivity(intent) }
         educationalReferencesBtn.setOnClickListener {
             val intent = Intent(this, EducationalReferencesActivity::class.java)
