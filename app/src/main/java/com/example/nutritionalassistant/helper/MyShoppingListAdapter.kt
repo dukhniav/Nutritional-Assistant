@@ -16,9 +16,7 @@ class MyShoppingListAdapter(private val shoppingList: ArrayList<ShopItem>): Recy
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.shopListName?.text = shoppingList[position].name
-        holder?.shopListPrice?.text = shoppingList[position].price.toString()
         holder?.shopListRecipe?.text = shoppingList[position].recipe
-        holder?.shopListCalories?.text = shoppingList[position].calories.toString()
     }
 
     override fun getItemCount(): Int {
@@ -27,10 +25,7 @@ class MyShoppingListAdapter(private val shoppingList: ArrayList<ShopItem>): Recy
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val shopListName = itemView.findViewById<TextView>(R.id.shoppingListItem)!!
-        val shopListPrice = itemView.findViewById<TextView>(R.id.shoppingListPrice)!!
         val shopListRecipe = itemView.findViewById<TextView>(R.id.shoppingListRecipe)!!
-        val shopListCalories = itemView.findViewById<TextView>(R.id.shoppingListCalories)!!
-
     }
 
 }
